@@ -1,6 +1,6 @@
 Package: bookclubsmltar
 Title: Supervised Machine Learning for Text Analysis in R Book Club
-Version: 1.0.0
+Version: 0.0.1
 Authors@R: c(
   person(
     "R4DS Online Learning Community",
