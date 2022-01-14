@@ -2,12 +2,49 @@
 
 **Learning objectives:**
 
-- (these are optional but helpful)
+- Understand subfields of linguistics
+- Learn how morphology plays a role in text modeling
+- Understand the limitation of different languages
+- Understand how text can vary
 
-## Slide 1
+## Linguistics for Text Analysis
 
-- Add slides as sections (marked with `##`).
-- Please give code chunks unique names (such as "01-something" for a block in chapter 1). This makes debugging much easier.
+![](img/table1.png)
+
+Understanding this hierarchy will help create *natural language features*. For example:    
+  - using a text that has been broken into sequences of characters for recurrent neural network - *morphology*  
+  - utilizing the part of speech information as feature - *syntax*
+  
+Most linguists view speech primary to written language (technological). Analyzing written text can be limiting as it less "creative" and more abstract.
+
+## A Glimpse into Morphology
+
+> The study of words, their internal structures and how they are formed
+
+!["source: http://designpublic.in/blogs/morphological-awareness-underrated-contributor-reading-ability/"](img/morph.jpeg)
+
+
+- English has a pretty low ratio of morphemes (smallest unit of part of a word with meaning)  
+  - i.e. "un-", "break", "-able"
+- Understanding morphological characteristics are beneficial for prop-processing, removing stopwords and end stemming
+
+## Different Languages
+
+**Remember, English is NOT the only language**
+
+*BenderRule* : acknowledge that the models being built are typically language-specific.  
+  - neglecting to state the language may give a false veneer of language-independence to the work
+  
+Thusly, most text used for modeling henceforth will be in English.
+
+## Other Ways Text can Vary
+
+- Dialects (e.e AAVE & detecting hate speech)  
+- Evolution of language  
+- Usage of slang
+
+Like ML in general, text modeling is very sensitive to the data used for training!
+
 
 ## Meeting Videos
 
