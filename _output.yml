@@ -5,7 +5,7 @@ bookdown::gitbook:
     toc:
       collapse: section
       before: |
-        <li><a href="./">Text Mining with R Book Club</a></li>
+        <li><a href="./">Supervised Machine Learning for Text Analysis in R Book Club</a></li>
       after: |
         <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
     edit:
