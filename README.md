@@ -19,6 +19,8 @@ If you would like to present, please add your name next to a chapter using the [
 </details>
 
 - 2022-01-14: Introduction - Shamsuddeen
+- 2022-01-14: Chapter 1 (Language and modeling) - Layla Bouzoubaa.
+
 
 <hr>
 
