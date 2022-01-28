@@ -397,8 +397,6 @@ Piding %>%
 
 
 
--   Please give code chunks unique names (such as "01-something" for a block in chapter 1). This makes debugging much easier.
-
 ## Meeting Videos
 
 ### Cohort 1

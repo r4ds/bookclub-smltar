@@ -12,6 +12,8 @@ URL: https://r4ds.github.io/bookclub-smltar, https://github.com/r4ds/bookclub-sm
 Depends:
     R (>= 3.1.0)
 Imports: 
+    quanteeda,
     bookdown,
     rmarkdown,
-    tidyverse
+    tidyverse,
+    shiny
