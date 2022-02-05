@@ -14,8 +14,10 @@ Depends:
 Imports: 
     hcandersenr,
     bookdown,
+    janeaustenr,
+    quanteda,
     rmarkdown,
+    shiny,
     tidytext,
     tidyverse,
-    tokenizers,
-    janeaustenr
+    tokenizers
