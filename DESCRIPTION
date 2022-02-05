@@ -15,6 +15,7 @@ Imports:
     hcandersenr,
     bookdown,
     rmarkdown,
+    tidytext,
     tidyverse,
     tokenizers,
     janeaustenr
