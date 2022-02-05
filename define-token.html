@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>6.2 Meeting Videos | Supervised Machine Learning for Text Analysis in R Book Club</title>
+  <title>2.1 Define “Token” | Supervised Machine Learning for Text Analysis in R Book Club</title>
   <meta name="description" content="This is the product of the R4DS Online Learning Community’s Supervised Machine Learning for Text Analysis in R Book Club." />
   <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="6.2 Meeting Videos | Supervised Machine Learning for Text Analysis in R Book Club" />
+  <meta property="og:title" content="2.1 Define “Token” | Supervised Machine Learning for Text Analysis in R Book Club" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="r4ds/bookclub-smltar" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="6.2 Meeting Videos | Supervised Machine Learning for Text Analysis in R Book Club" />
+  <meta name="twitter:title" content="2.1 Define “Token” | Supervised Machine Learning for Text Analysis in R Book Club" />
   
   <meta name="twitter:description" content="This is the product of the R4DS Online Learning Community’s Supervised Machine Learning for Text Analysis in R Book Club." />
   
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="slide-1-3.html"/>
-<link rel="next" href="classification.html"/>
+<link rel="prev" href="tokenization.html"/>
+<link rel="next" href="different-types-of-tokens.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -236,27 +236,65 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="meeting-videos-5" class="section level2">
-<h2><span class="header-section-number">6.2</span> Meeting Videos</h2>
-<div id="cohort-1-5" class="section level3">
-<h3><span class="header-section-number">6.2.1</span> Cohort 1</h3>
-<iframe src="https://www.youtube.com/embed/URL" width="100%" height="400px" data-external="1">
-</iframe>
-<details>
-<p><summary> Meeting chat log </summary></p>
-<pre><code>LOG</code></pre>
-</details>
-
+<div id="define-token" class="section level2">
+<h2><span class="header-section-number">2.1</span> Define “Token”</h2>
+<p>In tokenization, we take an <strong>input text</strong>, and break it up into <strong>pieces</strong> of <strong>meaningful sizes</strong>. We refer this pieces of texts as tokens.</p>
+<p><img src="img/02-token_example.PNG" /></p>
+<p>Most commonly, input texts are broken up into words. But this isn’t perfect.</p>
+<ul>
+<li>No white space in certain languages (她是我最好的朋友。- ‘she is my best friend’ in Mandarin)</li>
+<li>Pronouns/negation words (Je n’aime pas le chocolat - ‘I don’t like chocolate’ in French)</li>
+<li>Contractions of two words (would’ve, didn’t)</li>
+</ul>
+<p>Knowing this, let’s take a jab at tokenization. We’ll split on anything that is not an alphanumeric character.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="define-token.html#cb2-1"></a><span class="kw">library</span>(tidyverse)</span>
+<span id="cb2-2"><a href="define-token.html#cb2-2"></a><span class="kw">library</span>(hcandersenr)</span>
+<span id="cb2-3"><a href="define-token.html#cb2-3"></a></span>
+<span id="cb2-4"><a href="define-token.html#cb2-4"></a>the_fir_tree &lt;-<span class="st"> </span>hcandersen_en <span class="op">%&gt;%</span></span>
+<span id="cb2-5"><a href="define-token.html#cb2-5"></a><span class="st">  </span><span class="kw">filter</span>(book <span class="op">==</span><span class="st"> &quot;The fir tree&quot;</span>) <span class="op">%&gt;%</span></span>
+<span id="cb2-6"><a href="define-token.html#cb2-6"></a><span class="st">  </span><span class="kw">pull</span>(text)</span>
+<span id="cb2-7"><a href="define-token.html#cb2-7"></a></span>
+<span id="cb2-8"><a href="define-token.html#cb2-8"></a><span class="kw">head</span>(the_fir_tree, <span class="dv">9</span>)</span></code></pre></div>
+<pre><code>## [1] &quot;Far down in the forest, where the warm sun and the fresh air made a sweet&quot;    
+## [2] &quot;resting-place, grew a pretty little fir-tree; and yet it was not happy, it&quot;   
+## [3] &quot;wished so much to be tall like its companions– the pines and firs which grew&quot; 
+## [4] &quot;around it. The sun shone, and the soft air fluttered its leaves, and the&quot;     
+## [5] &quot;little peasant children passed by, prattling merrily, but the fir-tree heeded&quot;
+## [6] &quot;them not. Sometimes the children would bring a large basket of raspberries or&quot;
+## [7] &quot;strawberries, wreathed on a straw, and seat themselves near the fir-tree, and&quot;
+## [8] &quot;say, \&quot;Is it not a pretty little tree?\&quot; which made it feel more unhappy than&quot;
+## [9] &quot;before.&quot;</code></pre>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="define-token.html#cb4-1"></a><span class="kw">strsplit</span>(the_fir_tree[<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>], <span class="st">&quot;[^a-zA-Z0-9]+&quot;</span>)</span></code></pre></div>
+<pre><code>## [[1]]
+##  [1] &quot;Far&quot;    &quot;down&quot;   &quot;in&quot;     &quot;the&quot;    &quot;forest&quot; &quot;where&quot;  &quot;the&quot;    &quot;warm&quot;  
+##  [9] &quot;sun&quot;    &quot;and&quot;    &quot;the&quot;    &quot;fresh&quot;  &quot;air&quot;    &quot;made&quot;   &quot;a&quot;      &quot;sweet&quot; 
+## 
+## [[2]]
+##  [1] &quot;resting&quot; &quot;place&quot;   &quot;grew&quot;    &quot;a&quot;       &quot;pretty&quot;  &quot;little&quot;  &quot;fir&quot;    
+##  [8] &quot;tree&quot;    &quot;and&quot;     &quot;yet&quot;     &quot;it&quot;      &quot;was&quot;     &quot;not&quot;     &quot;happy&quot;  
+## [15] &quot;it&quot;</code></pre>
+<p>This is pretty good, but the hero’s name (fir-tree) has been split. This kind of information loss can be dangerous, and we need to use more delicate splitting methods, rather than brute-forcing with regex.</p>
+<p>Luckily, you don’t have to write all the custom logics yourself! This chapter introduces <code>tokenizers</code></p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="define-token.html#cb6-1"></a><span class="kw">library</span>(tokenizers)</span>
+<span id="cb6-2"><a href="define-token.html#cb6-2"></a><span class="kw">tokenize_words</span>(the_fir_tree[<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>])</span></code></pre></div>
+<pre><code>## [[1]]
+##  [1] &quot;far&quot;    &quot;down&quot;   &quot;in&quot;     &quot;the&quot;    &quot;forest&quot; &quot;where&quot;  &quot;the&quot;    &quot;warm&quot;  
+##  [9] &quot;sun&quot;    &quot;and&quot;    &quot;the&quot;    &quot;fresh&quot;  &quot;air&quot;    &quot;made&quot;   &quot;a&quot;      &quot;sweet&quot; 
+## 
+## [[2]]
+##  [1] &quot;resting&quot; &quot;place&quot;   &quot;grew&quot;    &quot;a&quot;       &quot;pretty&quot;  &quot;little&quot;  &quot;fir&quot;    
+##  [8] &quot;tree&quot;    &quot;and&quot;     &quot;yet&quot;     &quot;it&quot;      &quot;was&quot;     &quot;not&quot;     &quot;happy&quot;  
+## [15] &quot;it&quot;</code></pre>
+<p>The word-level tokenization in this package is done by finding word boundaries, which follows a number of sophisticated rules.</p>
+<p><img src="img/02-word_boundaries.PNG" /></p>
 </div>
-</div>
-<!-- </div> -->
             </section>
 
           </div>
         </div>
       </div>
-<a href="slide-1-3.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="classification.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="tokenization.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="different-types-of-tokens.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -287,7 +325,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/r4ds/bookclub-smltar/edit/main/06.Rmd",
+"link": "https://github.com/r4ds/bookclub-smltar/edit/main/02.Rmd",
 "text": "Edit"
 },
 "history": {

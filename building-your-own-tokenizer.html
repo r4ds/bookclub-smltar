@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>6.2 Meeting Videos | Supervised Machine Learning for Text Analysis in R Book Club</title>
+  <title>2.4 Building your own tokenizer | Supervised Machine Learning for Text Analysis in R Book Club</title>
   <meta name="description" content="This is the product of the R4DS Online Learning Community’s Supervised Machine Learning for Text Analysis in R Book Club." />
   <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="6.2 Meeting Videos | Supervised Machine Learning for Text Analysis in R Book Club" />
+  <meta property="og:title" content="2.4 Building your own tokenizer | Supervised Machine Learning for Text Analysis in R Book Club" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="r4ds/bookclub-smltar" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="6.2 Meeting Videos | Supervised Machine Learning for Text Analysis in R Book Club" />
+  <meta name="twitter:title" content="2.4 Building your own tokenizer | Supervised Machine Learning for Text Analysis in R Book Club" />
   
   <meta name="twitter:description" content="This is the product of the R4DS Online Learning Community’s Supervised Machine Learning for Text Analysis in R Book Club." />
   
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="slide-1-3.html"/>
-<link rel="next" href="classification.html"/>
+<link rel="prev" href="where-does-tokenization-break-down.html"/>
+<link rel="next" href="meeting-videos-1.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -236,27 +236,109 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="meeting-videos-5" class="section level2">
-<h2><span class="header-section-number">6.2</span> Meeting Videos</h2>
-<div id="cohort-1-5" class="section level3">
-<h3><span class="header-section-number">6.2.1</span> Cohort 1</h3>
-<iframe src="https://www.youtube.com/embed/URL" width="100%" height="400px" data-external="1">
-</iframe>
-<details>
-<p><summary> Meeting chat log </summary></p>
-<pre><code>LOG</code></pre>
-</details>
-
+<div id="building-your-own-tokenizer" class="section level2">
+<h2><span class="header-section-number">2.4</span> Building your own tokenizer</h2>
+<p>Regex time!</p>
+<p>There are two approaches</p>
+<ul>
+<li>Split the string up according to some rule.</li>
+<li>Extract tokens based on some rule.</li>
+</ul>
+<div id="mimick-tokenize_characters" class="section level3">
+<h3><span class="header-section-number">2.4.1</span> Mimick tokenize_characters()</h3>
+<p>From a string, we can <strong>extract</strong> the letters one by one.</p>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="building-your-own-tokenizer.html#cb30-1"></a>letter_tokens &lt;-<span class="st"> </span><span class="kw">str_extract_all</span>(</span>
+<span id="cb30-2"><a href="building-your-own-tokenizer.html#cb30-2"></a>  <span class="dt">string =</span> <span class="st">&quot;This sentence include 2 numbers and 1 period.&quot;</span>,</span>
+<span id="cb30-3"><a href="building-your-own-tokenizer.html#cb30-3"></a>  <span class="dt">pattern =</span> <span class="st">&quot;[:alpha:]{1}&quot;</span></span>
+<span id="cb30-4"><a href="building-your-own-tokenizer.html#cb30-4"></a>)</span>
+<span id="cb30-5"><a href="building-your-own-tokenizer.html#cb30-5"></a>letter_tokens</span></code></pre></div>
+<pre><code>## [[1]]
+##  [1] &quot;T&quot; &quot;h&quot; &quot;i&quot; &quot;s&quot; &quot;s&quot; &quot;e&quot; &quot;n&quot; &quot;t&quot; &quot;e&quot; &quot;n&quot; &quot;c&quot; &quot;e&quot; &quot;i&quot; &quot;n&quot; &quot;c&quot; &quot;l&quot; &quot;u&quot; &quot;d&quot; &quot;e&quot;
+## [20] &quot;n&quot; &quot;u&quot; &quot;m&quot; &quot;b&quot; &quot;e&quot; &quot;r&quot; &quot;s&quot; &quot;a&quot; &quot;n&quot; &quot;d&quot; &quot;p&quot; &quot;e&quot; &quot;r&quot; &quot;i&quot; &quot;o&quot; &quot;d&quot;</code></pre>
+<p>We have to be careful what we put in the regex</p>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="building-your-own-tokenizer.html#cb32-1"></a>danish_sentence &lt;-<span class="st"> &quot;Så mødte han en gammel heks på landevejen&quot;</span></span>
+<span id="cb32-2"><a href="building-your-own-tokenizer.html#cb32-2"></a></span>
+<span id="cb32-3"><a href="building-your-own-tokenizer.html#cb32-3"></a><span class="kw">str_extract_all</span>(danish_sentence, <span class="st">&quot;[:alpha:]&quot;</span>)</span></code></pre></div>
+<pre><code>## [[1]]
+##  [1] &quot;S&quot; &quot;å&quot; &quot;m&quot; &quot;ø&quot; &quot;d&quot; &quot;t&quot; &quot;e&quot; &quot;h&quot; &quot;a&quot; &quot;n&quot; &quot;e&quot; &quot;n&quot; &quot;g&quot; &quot;a&quot; &quot;m&quot; &quot;m&quot; &quot;e&quot; &quot;l&quot; &quot;h&quot;
+## [20] &quot;e&quot; &quot;k&quot; &quot;s&quot; &quot;p&quot; &quot;å&quot; &quot;l&quot; &quot;a&quot; &quot;n&quot; &quot;d&quot; &quot;e&quot; &quot;v&quot; &quot;e&quot; &quot;j&quot; &quot;e&quot; &quot;n&quot;</code></pre>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="building-your-own-tokenizer.html#cb34-1"></a><span class="kw">str_extract_all</span>(danish_sentence, <span class="st">&quot;[a-zA-Z]&quot;</span>)</span></code></pre></div>
+<pre><code>## [[1]]
+##  [1] &quot;S&quot; &quot;m&quot; &quot;d&quot; &quot;t&quot; &quot;e&quot; &quot;h&quot; &quot;a&quot; &quot;n&quot; &quot;e&quot; &quot;n&quot; &quot;g&quot; &quot;a&quot; &quot;m&quot; &quot;m&quot; &quot;e&quot; &quot;l&quot; &quot;h&quot; &quot;e&quot; &quot;k&quot;
+## [20] &quot;s&quot; &quot;p&quot; &quot;l&quot; &quot;a&quot; &quot;n&quot; &quot;d&quot; &quot;e&quot; &quot;v&quot; &quot;e&quot; &quot;j&quot; &quot;e&quot; &quot;n&quot;</code></pre>
+</div>
+<div id="allow-for-hyphenated-words-in-tokenize_words" class="section level3">
+<h3><span class="header-section-number">2.4.2</span> Allow for hyphenated words in tokenize_words()</h3>
+<p>Let’s make “fir-tree” a single word token.</p>
+<p>One way to do this is to <strong>split</strong> texts on white space, and dropping punctuations.</p>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="building-your-own-tokenizer.html#cb36-1"></a><span class="kw">str_split</span>(<span class="st">&quot;This isn&#39;t a sentence with fir-tree.&quot;</span>, <span class="st">&quot;[:space:]&quot;</span>)</span></code></pre></div>
+<pre><code>## [[1]]
+## [1] &quot;This&quot;      &quot;isn&#39;t&quot;     &quot;a&quot;         &quot;sentence&quot;  &quot;with&quot;      &quot;fir-tree.&quot;</code></pre>
+<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="building-your-own-tokenizer.html#cb38-1"></a><span class="kw">str_split</span>(<span class="st">&quot;This isn&#39;t a sentence with fir-tree.&quot;</span>, <span class="st">&quot;[:space:]&quot;</span>) <span class="op">%&gt;%</span></span>
+<span id="cb38-2"><a href="building-your-own-tokenizer.html#cb38-2"></a><span class="st">  </span><span class="kw">map</span>(<span class="op">~</span><span class="st"> </span><span class="kw">str_remove_all</span>(.x, <span class="st">&quot;^[:punct:]+|[:punct:]+$&quot;</span>))</span></code></pre></div>
+<pre><code>## [[1]]
+## [1] &quot;This&quot;     &quot;isn&#39;t&quot;    &quot;a&quot;        &quot;sentence&quot; &quot;with&quot;     &quot;fir-tree&quot;</code></pre>
+<p>Another way is to <strong>extract</strong> the hyphenated word.</p>
+<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="building-your-own-tokenizer.html#cb40-1"></a><span class="kw">str_extract_all</span>(</span>
+<span id="cb40-2"><a href="building-your-own-tokenizer.html#cb40-2"></a>  <span class="dt">string =</span> <span class="st">&quot;This isn&#39;t a sentence with fir-tree.&quot;</span>,</span>
+<span id="cb40-3"><a href="building-your-own-tokenizer.html#cb40-3"></a>  <span class="dt">pattern =</span> <span class="st">&quot;[:alpha:]+-[:alpha:]+&quot;</span></span>
+<span id="cb40-4"><a href="building-your-own-tokenizer.html#cb40-4"></a>)</span></code></pre></div>
+<pre><code>## [[1]]
+## [1] &quot;fir-tree&quot;</code></pre>
+<p>use ? quantifier in regex, to optionally match pattern.</p>
+<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="building-your-own-tokenizer.html#cb42-1"></a><span class="kw">str_extract_all</span>(</span>
+<span id="cb42-2"><a href="building-your-own-tokenizer.html#cb42-2"></a>  <span class="dt">string =</span> <span class="st">&quot;This isn&#39;t a sentence with fir-tree.&quot;</span>,</span>
+<span id="cb42-3"><a href="building-your-own-tokenizer.html#cb42-3"></a>  <span class="dt">pattern =</span> <span class="st">&quot;[:alpha:]+-?[:alpha:]+&quot;</span></span>
+<span id="cb42-4"><a href="building-your-own-tokenizer.html#cb42-4"></a>)</span></code></pre></div>
+<pre><code>## [[1]]
+## [1] &quot;This&quot;     &quot;isn&quot;      &quot;sentence&quot; &quot;with&quot;     &quot;fir-tree&quot;</code></pre>
+<p>include <code>'</code> in the [:alpha:] class</p>
+<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="building-your-own-tokenizer.html#cb44-1"></a><span class="kw">str_extract_all</span>(</span>
+<span id="cb44-2"><a href="building-your-own-tokenizer.html#cb44-2"></a>  <span class="dt">string =</span> <span class="st">&quot;This isn&#39;t a sentence with fir-tree.&quot;</span>,</span>
+<span id="cb44-3"><a href="building-your-own-tokenizer.html#cb44-3"></a>  <span class="dt">pattern =</span> <span class="st">&quot;[[:alpha:]&#39;]+-?[[:alpha:]&#39;]+&quot;</span></span>
+<span id="cb44-4"><a href="building-your-own-tokenizer.html#cb44-4"></a>)</span></code></pre></div>
+<pre><code>## [[1]]
+## [1] &quot;This&quot;     &quot;isn&#39;t&quot;    &quot;sentence&quot; &quot;with&quot;     &quot;fir-tree&quot;</code></pre>
+<p>The letter “a” is missing, because the regex so far assumes at least 2 characters. Get around that, by using <code>|</code> to set up a match for one or more [:alpha:]</p>
+<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="building-your-own-tokenizer.html#cb46-1"></a><span class="kw">str_extract_all</span>(</span>
+<span id="cb46-2"><a href="building-your-own-tokenizer.html#cb46-2"></a>  <span class="dt">string =</span> <span class="st">&quot;This isn&#39;t a sentence with fir-tree.&quot;</span>,</span>
+<span id="cb46-3"><a href="building-your-own-tokenizer.html#cb46-3"></a>  <span class="dt">pattern =</span> <span class="st">&quot;[[:alpha:]&#39;]+-?[[:alpha:]&#39;]+|[:alpha:]{1}&quot;</span></span>
+<span id="cb46-4"><a href="building-your-own-tokenizer.html#cb46-4"></a>)</span></code></pre></div>
+<pre><code>## [[1]]
+## [1] &quot;This&quot;     &quot;isn&#39;t&quot;    &quot;a&quot;        &quot;sentence&quot; &quot;with&quot;     &quot;fir-tree&quot;</code></pre>
+</div>
+<div id="character-n-gram-tokenizer" class="section level3">
+<h3><span class="header-section-number">2.4.3</span> Character n-gram tokenizer</h3>
+<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="building-your-own-tokenizer.html#cb48-1"></a>tokenize_character_ngram &lt;-<span class="st"> </span><span class="cf">function</span>(x, n) {</span>
+<span id="cb48-2"><a href="building-your-own-tokenizer.html#cb48-2"></a>    ngram_loc &lt;-<span class="st"> </span><span class="kw">str_locate_all</span>(x, <span class="kw">paste0</span>(<span class="st">&quot;(?=(</span><span class="ch">\\</span><span class="st">w{&quot;</span>, n, <span class="st">&quot;}))&quot;</span>))</span>
+<span id="cb48-3"><a href="building-your-own-tokenizer.html#cb48-3"></a>    </span>
+<span id="cb48-4"><a href="building-your-own-tokenizer.html#cb48-4"></a>    <span class="kw">map2</span>(ngram_loc, x, <span class="op">~</span><span class="kw">str_sub</span>(.y, .x[, <span class="dv">1</span>], .x[, <span class="dv">1</span>] <span class="op">+</span><span class="st"> </span>n <span class="op">-</span><span class="st"> </span><span class="dv">1</span>))</span>
+<span id="cb48-5"><a href="building-your-own-tokenizer.html#cb48-5"></a>}</span>
+<span id="cb48-6"><a href="building-your-own-tokenizer.html#cb48-6"></a></span>
+<span id="cb48-7"><a href="building-your-own-tokenizer.html#cb48-7"></a><span class="kw">tokenize_character_ngram</span>(the_fir_tree[<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>], <span class="dt">n =</span> <span class="dv">3</span>)</span></code></pre></div>
+<pre><code>## [[1]]
+##  [1] &quot;Far&quot; &quot;dow&quot; &quot;own&quot; &quot;the&quot; &quot;for&quot; &quot;ore&quot; &quot;res&quot; &quot;est&quot; &quot;whe&quot; &quot;her&quot; &quot;ere&quot; &quot;the&quot;
+## [13] &quot;war&quot; &quot;arm&quot; &quot;sun&quot; &quot;and&quot; &quot;the&quot; &quot;fre&quot; &quot;res&quot; &quot;esh&quot; &quot;air&quot; &quot;mad&quot; &quot;ade&quot; &quot;swe&quot;
+## [25] &quot;wee&quot; &quot;eet&quot;
+## 
+## [[2]]
+##  [1] &quot;res&quot; &quot;est&quot; &quot;sti&quot; &quot;tin&quot; &quot;ing&quot; &quot;pla&quot; &quot;lac&quot; &quot;ace&quot; &quot;gre&quot; &quot;rew&quot; &quot;pre&quot; &quot;ret&quot;
+## [13] &quot;ett&quot; &quot;tty&quot; &quot;lit&quot; &quot;itt&quot; &quot;ttl&quot; &quot;tle&quot; &quot;fir&quot; &quot;tre&quot; &quot;ree&quot; &quot;and&quot; &quot;yet&quot; &quot;was&quot;
+## [25] &quot;not&quot; &quot;hap&quot; &quot;app&quot; &quot;ppy&quot;
+## 
+## [[3]]
+##  [1] &quot;wis&quot; &quot;ish&quot; &quot;she&quot; &quot;hed&quot; &quot;muc&quot; &quot;uch&quot; &quot;tal&quot; &quot;all&quot; &quot;lik&quot; &quot;ike&quot; &quot;its&quot; &quot;com&quot;
+## [13] &quot;omp&quot; &quot;mpa&quot; &quot;pan&quot; &quot;ani&quot; &quot;nio&quot; &quot;ion&quot; &quot;ons&quot; &quot;the&quot; &quot;pin&quot; &quot;ine&quot; &quot;nes&quot; &quot;and&quot;
+## [25] &quot;fir&quot; &quot;irs&quot; &quot;whi&quot; &quot;hic&quot; &quot;ich&quot; &quot;gre&quot; &quot;rew&quot;</code></pre>
 </div>
 </div>
-<!-- </div> -->
             </section>
 
           </div>
         </div>
       </div>
-<a href="slide-1-3.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="classification.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="where-does-tokenization-break-down.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="meeting-videos-1.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -287,7 +369,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/r4ds/bookclub-smltar/edit/main/06.Rmd",
+"link": "https://github.com/r4ds/bookclub-smltar/edit/main/02.Rmd",
 "text": "Edit"
 },
 "history": {

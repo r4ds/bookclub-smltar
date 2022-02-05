@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>9.1 Slide 1 | Supervised Machine Learning for Text Analysis in R Book Club</title>
+  <title>10.1 Slide 1 | Supervised Machine Learning for Text Analysis in R Book Club</title>
   <meta name="description" content="This is the product of the R4DS Online Learning Community’s Supervised Machine Learning for Text Analysis in R Book Club." />
   <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="9.1 Slide 1 | Supervised Machine Learning for Text Analysis in R Book Club" />
+  <meta property="og:title" content="10.1 Slide 1 | Supervised Machine Learning for Text Analysis in R Book Club" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="r4ds/bookclub-smltar" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="9.1 Slide 1 | Supervised Machine Learning for Text Analysis in R Book Club" />
+  <meta name="twitter:title" content="10.1 Slide 1 | Supervised Machine Learning for Text Analysis in R Book Club" />
   
   <meta name="twitter:description" content="This is the product of the R4DS Online Learning Community’s Supervised Machine Learning for Text Analysis in R Book Club." />
   
@@ -24,15 +24,15 @@
 <meta name="author" content="The R4DS Online Learning Community" />
 
 
-<meta name="date" content="2022-01-23" />
+<meta name="date" content="2022-02-05" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="long-short-term-memory-lstm-networks.html"/>
-<link rel="next" href="meeting-videos-8.html"/>
+<link rel="prev" href="convolutional-neural-networks.html"/>
+<link rel="next" href="meeting-videos-9.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -55,6 +55,70 @@
 <script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
 
 
+<style type="text/css">
+code.sourceCode > span { display: inline-block; line-height: 1.25; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
 
 
 <link rel="stylesheet" href="style.css" type="text/css" />
@@ -87,55 +151,67 @@
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="2" data-path="tokenization.html"><a href="tokenization.html"><i class="fa fa-check"></i><b>2</b> Tokenization</a><ul>
-<li class="chapter" data-level="2.1" data-path="slide-1.html"><a href="slide-1.html"><i class="fa fa-check"></i><b>2.1</b> Slide 1</a></li>
-<li class="chapter" data-level="2.2" data-path="meeting-videos-1.html"><a href="meeting-videos-1.html"><i class="fa fa-check"></i><b>2.2</b> Meeting Videos</a><ul>
-<li class="chapter" data-level="2.2.1" data-path="meeting-videos-1.html"><a href="meeting-videos-1.html#cohort-1-1"><i class="fa fa-check"></i><b>2.2.1</b> Cohort 1</a></li>
+<li class="chapter" data-level="2.1" data-path="define-token.html"><a href="define-token.html"><i class="fa fa-check"></i><b>2.1</b> Define “Token”</a></li>
+<li class="chapter" data-level="2.2" data-path="different-types-of-tokens.html"><a href="different-types-of-tokens.html"><i class="fa fa-check"></i><b>2.2</b> Different types of tokens</a><ul>
+<li class="chapter" data-level="2.2.1" data-path="different-types-of-tokens.html"><a href="different-types-of-tokens.html#token-type-character"><i class="fa fa-check"></i><b>2.2.1</b> Token type: Character</a></li>
+<li class="chapter" data-level="2.2.2" data-path="different-types-of-tokens.html"><a href="different-types-of-tokens.html#token-type-word"><i class="fa fa-check"></i><b>2.2.2</b> Token type: Word</a></li>
+<li class="chapter" data-level="2.2.3" data-path="different-types-of-tokens.html"><a href="different-types-of-tokens.html#token-type-n-grams"><i class="fa fa-check"></i><b>2.2.3</b> Token type: n-grams</a></li>
+<li class="chapter" data-level="2.2.4" data-path="different-types-of-tokens.html"><a href="different-types-of-tokens.html#token-type-lines-sentence-and-paragraph"><i class="fa fa-check"></i><b>2.2.4</b> Token type: Lines, sentence, and paragraph</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="where-does-tokenization-break-down.html"><a href="where-does-tokenization-break-down.html"><i class="fa fa-check"></i><b>2.3</b> Where does tokenization break down?</a></li>
+<li class="chapter" data-level="2.4" data-path="building-your-own-tokenizer.html"><a href="building-your-own-tokenizer.html"><i class="fa fa-check"></i><b>2.4</b> Building your own tokenizer</a><ul>
+<li class="chapter" data-level="2.4.1" data-path="building-your-own-tokenizer.html"><a href="building-your-own-tokenizer.html#mimick-tokenize_characters"><i class="fa fa-check"></i><b>2.4.1</b> Mimick tokenize_characters()</a></li>
+<li class="chapter" data-level="2.4.2" data-path="building-your-own-tokenizer.html"><a href="building-your-own-tokenizer.html#allow-for-hyphenated-words-in-tokenize_words"><i class="fa fa-check"></i><b>2.4.2</b> Allow for hyphenated words in tokenize_words()</a></li>
+<li class="chapter" data-level="2.4.3" data-path="building-your-own-tokenizer.html"><a href="building-your-own-tokenizer.html#character-n-gram-tokenizer"><i class="fa fa-check"></i><b>2.4.3</b> Character n-gram tokenizer</a></li>
+</ul></li>
+<li class="chapter" data-level="2.5" data-path="meeting-videos-1.html"><a href="meeting-videos-1.html"><i class="fa fa-check"></i><b>2.5</b> Meeting Videos</a><ul>
+<li class="chapter" data-level="2.5.1" data-path="meeting-videos-1.html"><a href="meeting-videos-1.html#cohort-1-1"><i class="fa fa-check"></i><b>2.5.1</b> Cohort 1</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="stop-words.html"><a href="stop-words.html"><i class="fa fa-check"></i><b>3</b> Stop words</a><ul>
-<li class="chapter" data-level="3.1" data-path="slide-1-1.html"><a href="slide-1-1.html"><i class="fa fa-check"></i><b>3.1</b> Slide 1</a></li>
+<li class="chapter" data-level="3.1" data-path="slide-1.html"><a href="slide-1.html"><i class="fa fa-check"></i><b>3.1</b> Slide 1</a></li>
 <li class="chapter" data-level="3.2" data-path="meeting-videos-2.html"><a href="meeting-videos-2.html"><i class="fa fa-check"></i><b>3.2</b> Meeting Videos</a><ul>
 <li class="chapter" data-level="3.2.1" data-path="meeting-videos-2.html"><a href="meeting-videos-2.html#cohort-1-2"><i class="fa fa-check"></i><b>3.2.1</b> Cohort 1</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="stemming.html"><a href="stemming.html"><i class="fa fa-check"></i><b>4</b> Stemming</a><ul>
-<li class="chapter" data-level="4.1" data-path="slide-1-2.html"><a href="slide-1-2.html"><i class="fa fa-check"></i><b>4.1</b> Slide 1</a></li>
+<li class="chapter" data-level="4.1" data-path="slide-1-1.html"><a href="slide-1-1.html"><i class="fa fa-check"></i><b>4.1</b> Slide 1</a></li>
 <li class="chapter" data-level="4.2" data-path="meeting-videos-3.html"><a href="meeting-videos-3.html"><i class="fa fa-check"></i><b>4.2</b> Meeting Videos</a><ul>
 <li class="chapter" data-level="4.2.1" data-path="meeting-videos-3.html"><a href="meeting-videos-3.html#cohort-1-3"><i class="fa fa-check"></i><b>4.2.1</b> Cohort 1</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="word-embeddings.html"><a href="word-embeddings.html"><i class="fa fa-check"></i><b>5</b> Word Embeddings</a><ul>
-<li class="chapter" data-level="5.1" data-path="slide-1-3.html"><a href="slide-1-3.html"><i class="fa fa-check"></i><b>5.1</b> Slide 1</a></li>
+<li class="chapter" data-level="5.1" data-path="slide-1-2.html"><a href="slide-1-2.html"><i class="fa fa-check"></i><b>5.1</b> Slide 1</a></li>
 <li class="chapter" data-level="5.2" data-path="meeting-videos-4.html"><a href="meeting-videos-4.html"><i class="fa fa-check"></i><b>5.2</b> Meeting Videos</a><ul>
 <li class="chapter" data-level="5.2.1" data-path="meeting-videos-4.html"><a href="meeting-videos-4.html#cohort-1-4"><i class="fa fa-check"></i><b>5.2.1</b> Cohort 1</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="regression.html"><a href="regression.html"><i class="fa fa-check"></i><b>6</b> Regression</a><ul>
-<li class="chapter" data-level="6.1" data-path="slide-1-4.html"><a href="slide-1-4.html"><i class="fa fa-check"></i><b>6.1</b> Slide 1</a></li>
+<li class="chapter" data-level="6.1" data-path="slide-1-3.html"><a href="slide-1-3.html"><i class="fa fa-check"></i><b>6.1</b> Slide 1</a></li>
 <li class="chapter" data-level="6.2" data-path="meeting-videos-5.html"><a href="meeting-videos-5.html"><i class="fa fa-check"></i><b>6.2</b> Meeting Videos</a><ul>
 <li class="chapter" data-level="6.2.1" data-path="meeting-videos-5.html"><a href="meeting-videos-5.html#cohort-1-5"><i class="fa fa-check"></i><b>6.2.1</b> Cohort 1</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="7" data-path="classification.html"><a href="classification.html"><i class="fa fa-check"></i><b>7</b> Classification</a><ul>
-<li class="chapter" data-level="7.1" data-path="slide-1-5.html"><a href="slide-1-5.html"><i class="fa fa-check"></i><b>7.1</b> Slide 1</a></li>
+<li class="chapter" data-level="7.1" data-path="slide-1-4.html"><a href="slide-1-4.html"><i class="fa fa-check"></i><b>7.1</b> Slide 1</a></li>
 <li class="chapter" data-level="7.2" data-path="meeting-videos-6.html"><a href="meeting-videos-6.html"><i class="fa fa-check"></i><b>7.2</b> Meeting Videos</a><ul>
 <li class="chapter" data-level="7.2.1" data-path="meeting-videos-6.html"><a href="meeting-videos-6.html#cohort-1-6"><i class="fa fa-check"></i><b>7.2.1</b> Cohort 1</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="8" data-path="dense-neural-networks.html"><a href="dense-neural-networks.html"><i class="fa fa-check"></i><b>8</b> Dense neural networks</a><ul>
-<li class="chapter" data-level="8.1" data-path="slide-1-6.html"><a href="slide-1-6.html"><i class="fa fa-check"></i><b>8.1</b> Slide 1</a></li>
+<li class="chapter" data-level="8.1" data-path="slide-1-5.html"><a href="slide-1-5.html"><i class="fa fa-check"></i><b>8.1</b> Slide 1</a></li>
 <li class="chapter" data-level="8.2" data-path="meeting-videos-7.html"><a href="meeting-videos-7.html"><i class="fa fa-check"></i><b>8.2</b> Meeting Videos</a><ul>
 <li class="chapter" data-level="8.2.1" data-path="meeting-videos-7.html"><a href="meeting-videos-7.html#cohort-1-7"><i class="fa fa-check"></i><b>8.2.1</b> Cohort 1</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="9" data-path="long-short-term-memory-lstm-networks.html"><a href="long-short-term-memory-lstm-networks.html"><i class="fa fa-check"></i><b>9</b> Long short-term memory (LSTM) networks</a><ul>
-<li class="chapter" data-level="9.1" data-path="slide-1-7.html"><a href="slide-1-7.html"><i class="fa fa-check"></i><b>9.1</b> Slide 1</a></li>
+<li class="chapter" data-level="9.1" data-path="slide-1-6.html"><a href="slide-1-6.html"><i class="fa fa-check"></i><b>9.1</b> Slide 1</a></li>
 <li class="chapter" data-level="9.2" data-path="meeting-videos-8.html"><a href="meeting-videos-8.html"><i class="fa fa-check"></i><b>9.2</b> Meeting Videos</a><ul>
 <li class="chapter" data-level="9.2.1" data-path="meeting-videos-8.html"><a href="meeting-videos-8.html#cohort-1-8"><i class="fa fa-check"></i><b>9.2.1</b> Cohort 1</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="10" data-path="convolutional-neural-networks.html"><a href="convolutional-neural-networks.html"><i class="fa fa-check"></i><b>10</b> Convolutional neural networks</a><ul>
-<li class="chapter" data-level="10.1" data-path="slide-1-8.html"><a href="slide-1-8.html"><i class="fa fa-check"></i><b>10.1</b> Slide 1</a></li>
+<li class="chapter" data-level="10.1" data-path="slide-1-7.html"><a href="slide-1-7.html"><i class="fa fa-check"></i><b>10.1</b> Slide 1</a></li>
 <li class="chapter" data-level="10.2" data-path="meeting-videos-9.html"><a href="meeting-videos-9.html"><i class="fa fa-check"></i><b>10.2</b> Meeting Videos</a><ul>
 <li class="chapter" data-level="10.2.1" data-path="meeting-videos-9.html"><a href="meeting-videos-9.html#cohort-1-9"><i class="fa fa-check"></i><b>10.2.1</b> Cohort 1</a></li>
 </ul></li>
@@ -161,7 +237,7 @@
 
             <section class="normal" id="section-">
 <div id="slide-1-7" class="section level2">
-<h2><span class="header-section-number">9.1</span> Slide 1</h2>
+<h2><span class="header-section-number">10.1</span> Slide 1</h2>
 <ul>
 <li>Add slides as sections (marked with <code>##</code>).</li>
 <li>Please give code chunks unique names (such as “01-something” for a block in chapter 1). This makes debugging much easier.</li>
@@ -172,8 +248,8 @@
           </div>
         </div>
       </div>
-<a href="long-short-term-memory-lstm-networks.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="meeting-videos-8.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="convolutional-neural-networks.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="meeting-videos-9.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -204,7 +280,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/r4ds/bookclub-smltar/edit/main/09.Rmd",
+"link": "https://github.com/r4ds/bookclub-smltar/edit/main/10.Rmd",
 "text": "Edit"
 },
 "history": {
