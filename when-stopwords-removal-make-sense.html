@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>10.1 Slide 1 | Supervised Machine Learning for Text Analysis in R Book Club</title>
+  <title>3.3 When stopwords removal make sense? | Supervised Machine Learning for Text Analysis in R Book Club</title>
   <meta name="description" content="This is the product of the R4DS Online Learning Community’s Supervised Machine Learning for Text Analysis in R Book Club." />
   <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="10.1 Slide 1 | Supervised Machine Learning for Text Analysis in R Book Club" />
+  <meta property="og:title" content="3.3 When stopwords removal make sense? | Supervised Machine Learning for Text Analysis in R Book Club" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="r4ds/bookclub-smltar" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="10.1 Slide 1 | Supervised Machine Learning for Text Analysis in R Book Club" />
+  <meta name="twitter:title" content="3.3 When stopwords removal make sense? | Supervised Machine Learning for Text Analysis in R Book Club" />
   
   <meta name="twitter:description" content="This is the product of the R4DS Online Learning Community’s Supervised Machine Learning for Text Analysis in R Book Club." />
   
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="convolutional-neural-networks.html"/>
-<link rel="next" href="meeting-videos-9.html"/>
+<link rel="prev" href="why-do-we-remove-them.html"/>
+<link rel="next" href="using-off-the-shelf-stop-word-lists.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -245,11 +245,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="slide-1-6" class="section level2">
-<h2><span class="header-section-number">10.1</span> Slide 1</h2>
+<div id="when-stopwords-removal-make-sense" class="section level2">
+<h2><span class="header-section-number">3.3</span> When stopwords removal make sense?</h2>
 <ul>
-<li>Add slides as sections (marked with <code>##</code>).</li>
-<li>Please give code chunks unique names (such as “01-something” for a block in chapter 1). This makes debugging much easier.</li>
+<li><p>Removal of stopwords depends on the task you are solving.</p></li>
+<li><p>There is no hard and fast rule on when to remove stop words. But we should remove stop words if our task is one of Language Classification, Spam Filtering, Caption Generation, Auto-Tag Generation, Sentiment analysis, or something that is related to text classification</p></li>
+<li><p>On the other hand, if our task is one of Machine Translation, Question-Answering problems, Text Summarization, Language Modeling, it’s better not to remove the stop words as they are a crucial part of these applications</p></li>
+<li><p><strong>Less complex Model</strong>: Stop words do not carry meaning on their own, but only in the context of a sentence. If you use a model (a linear classifier, decision tree/forest) that is in principle incapable of leveraging the context, keeping the stop words cannot actually help.</p></li>
+<li><p><strong>Complex Model</strong> : But, if you use more complex models (LSTM, Transformers) that can grasp the grammatical meaning of the stopwords, it does not make sense to remove them.</p></li>
+<li><p>Sentiment analysis task is sensitive to stop words (e.g., David is not happy vs (David, Happy))</p></li>
+<li><p>So, what kind of stopwords to inlude depend on the task at hand?</p></li>
+<li><p>it’s better to keep these words and do some tests with and without them to see how it affects the model and you should never remove stop words without thinking about the impact of these words on the problem you are trying to solve.</p></li>
 </ul>
 </div>
             </section>
@@ -257,8 +263,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           </div>
         </div>
       </div>
-<a href="convolutional-neural-networks.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="meeting-videos-9.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="why-do-we-remove-them.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="using-off-the-shelf-stop-word-lists.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -289,7 +295,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/r4ds/bookclub-smltar/edit/main/10.Rmd",
+"link": "https://github.com/r4ds/bookclub-smltar/edit/main/03.Rmd",
 "text": "Edit"
 },
 "history": {

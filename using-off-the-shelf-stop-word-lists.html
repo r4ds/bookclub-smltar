@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>10.1 Slide 1 | Supervised Machine Learning for Text Analysis in R Book Club</title>
+  <title>3.4 Using off-the-shelf stop word lists | Supervised Machine Learning for Text Analysis in R Book Club</title>
   <meta name="description" content="This is the product of the R4DS Online Learning Community’s Supervised Machine Learning for Text Analysis in R Book Club." />
   <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="10.1 Slide 1 | Supervised Machine Learning for Text Analysis in R Book Club" />
+  <meta property="og:title" content="3.4 Using off-the-shelf stop word lists | Supervised Machine Learning for Text Analysis in R Book Club" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="r4ds/bookclub-smltar" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="10.1 Slide 1 | Supervised Machine Learning for Text Analysis in R Book Club" />
+  <meta name="twitter:title" content="3.4 Using off-the-shelf stop word lists | Supervised Machine Learning for Text Analysis in R Book Club" />
   
   <meta name="twitter:description" content="This is the product of the R4DS Online Learning Community’s Supervised Machine Learning for Text Analysis in R Book Club." />
   
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="convolutional-neural-networks.html"/>
-<link rel="next" href="meeting-videos-9.html"/>
+<link rel="prev" href="when-stopwords-removal-make-sense.html"/>
+<link rel="next" href="stop-word-removal-in-r.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -245,20 +245,55 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="slide-1-6" class="section level2">
-<h2><span class="header-section-number">10.1</span> Slide 1</h2>
+<div id="using-off-the-shelf-stop-word-lists" class="section level2">
+<h2><span class="header-section-number">3.4</span> Using off-the-shelf stop word lists</h2>
 <ul>
-<li>Add slides as sections (marked with <code>##</code>).</li>
-<li>Please give code chunks unique names (such as “01-something” for a block in chapter 1). This makes debugging much easier.</li>
+<li><p>A quick option for using stop words is to get a list that has already been created.</p></li>
+<li><p>There are many lits available, but not all lists are created equal</p></li>
+<li><p>Quanteda provides multilingual stopwords</p></li>
 </ul>
+<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb51-1"><a href="using-off-the-shelf-stop-word-lists.html#cb51-1"></a><span class="kw">library</span>(quanteda)</span>
+<span id="cb51-2"><a href="using-off-the-shelf-stop-word-lists.html#cb51-2"></a>stopwords<span class="op">::</span><span class="kw">stopwords_getsources</span>()</span></code></pre></div>
+<pre><code>## [1] &quot;snowball&quot;      &quot;stopwords-iso&quot; &quot;misc&quot;          &quot;smart&quot;        
+## [5] &quot;marimo&quot;        &quot;ancient&quot;       &quot;nltk&quot;          &quot;perseus&quot;</code></pre>
+<ul>
+<li>Get languages supported by a stopwords</li>
+</ul>
+<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb53-1"><a href="using-off-the-shelf-stop-word-lists.html#cb53-1"></a>stopwords<span class="op">::</span><span class="kw">stopwords_getlanguages</span>(<span class="st">&quot;snowball&quot;</span>)</span></code></pre></div>
+<pre><code>##  [1] &quot;da&quot; &quot;de&quot; &quot;en&quot; &quot;es&quot; &quot;fi&quot; &quot;fr&quot; &quot;hu&quot; &quot;ir&quot; &quot;it&quot; &quot;nl&quot; &quot;no&quot; &quot;pt&quot; &quot;ro&quot; &quot;ru&quot; &quot;sv&quot;</code></pre>
+<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb55-1"><a href="using-off-the-shelf-stop-word-lists.html#cb55-1"></a>stopwords<span class="op">::</span><span class="kw">stopwords_getlanguages</span>(<span class="st">&quot;nltk&quot;</span>)</span></code></pre></div>
+<pre><code>##  [1] &quot;ar&quot; &quot;az&quot; &quot;da&quot; &quot;nl&quot; &quot;en&quot; &quot;fi&quot; &quot;fr&quot; &quot;de&quot; &quot;el&quot; &quot;hu&quot; &quot;id&quot; &quot;it&quot; &quot;kk&quot; &quot;ne&quot; &quot;no&quot;
+## [16] &quot;pt&quot; &quot;ro&quot; &quot;ru&quot; &quot;sl&quot; &quot;es&quot; &quot;sv&quot; &quot;tg&quot; &quot;tr&quot;</code></pre>
+<div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb57-1"><a href="using-off-the-shelf-stop-word-lists.html#cb57-1"></a>stopwords<span class="op">::</span><span class="kw">stopwords_getlanguages</span>(<span class="st">&quot;stopwords-iso&quot;</span>)</span></code></pre></div>
+<pre><code>##  [1] &quot;af&quot; &quot;ar&quot; &quot;hy&quot; &quot;eu&quot; &quot;bn&quot; &quot;br&quot; &quot;bg&quot; &quot;ca&quot; &quot;zh&quot; &quot;hr&quot; &quot;cs&quot; &quot;da&quot; &quot;nl&quot; &quot;en&quot; &quot;eo&quot;
+## [16] &quot;et&quot; &quot;fi&quot; &quot;fr&quot; &quot;gl&quot; &quot;de&quot; &quot;el&quot; &quot;ha&quot; &quot;he&quot; &quot;hi&quot; &quot;hu&quot; &quot;id&quot; &quot;ga&quot; &quot;it&quot; &quot;ja&quot; &quot;ko&quot;
+## [31] &quot;ku&quot; &quot;la&quot; &quot;lt&quot; &quot;lv&quot; &quot;ms&quot; &quot;mr&quot; &quot;no&quot; &quot;fa&quot; &quot;pl&quot; &quot;pt&quot; &quot;ro&quot; &quot;ru&quot; &quot;sk&quot; &quot;sl&quot; &quot;so&quot;
+## [46] &quot;st&quot; &quot;es&quot; &quot;sw&quot; &quot;sv&quot; &quot;th&quot; &quot;tl&quot; &quot;tr&quot; &quot;uk&quot; &quot;ur&quot; &quot;vi&quot; &quot;yo&quot; &quot;zu&quot;</code></pre>
+<ul>
+<li>Default stopword in Quanteeda is snowball. Why?</li>
+</ul>
+<div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb59-1"><a href="using-off-the-shelf-stop-word-lists.html#cb59-1"></a><span class="kw">length</span>(stopwords<span class="op">::</span><span class="kw">stopwords</span>(<span class="dt">source =</span> <span class="st">&quot;smart&quot;</span>))</span></code></pre></div>
+<pre><code>## [1] 571</code></pre>
+<div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb61-1"><a href="using-off-the-shelf-stop-word-lists.html#cb61-1"></a><span class="kw">length</span>(stopwords<span class="op">::</span><span class="kw">stopwords</span>(<span class="dt">source =</span> <span class="st">&quot;snowball&quot;</span>))</span></code></pre></div>
+<pre><code>## [1] 175</code></pre>
+<div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb63-1"><a href="using-off-the-shelf-stop-word-lists.html#cb63-1"></a><span class="kw">length</span>(stopwords<span class="op">::</span><span class="kw">stopwords</span>(<span class="dt">source =</span> <span class="st">&quot;stopwords-iso&quot;</span>))</span></code></pre></div>
+<pre><code>## [1] 1298</code></pre>
+<ul>
+<li><p>These stopwords do intersect</p></li>
+<li><p>Bt, words that appear in Snowball and ISO but not in the SMART list.</p></li>
+</ul>
+<div class="sourceCode" id="cb65"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb65-1"><a href="using-off-the-shelf-stop-word-lists.html#cb65-1"></a><span class="kw">setdiff</span>(<span class="kw">stopwords</span>(<span class="dt">source =</span> <span class="st">&quot;snowball&quot;</span>),</span>
+<span id="cb65-2"><a href="using-off-the-shelf-stop-word-lists.html#cb65-2"></a>        <span class="kw">stopwords</span>(<span class="dt">source =</span> <span class="st">&quot;smart&quot;</span>))</span></code></pre></div>
+<pre><code>##  [1] &quot;she&#39;s&quot;   &quot;he&#39;d&quot;    &quot;she&#39;d&quot;   &quot;he&#39;ll&quot;   &quot;she&#39;ll&quot;  &quot;shan&#39;t&quot;  &quot;mustn&#39;t&quot;
+##  [8] &quot;when&#39;s&quot;  &quot;why&#39;s&quot;   &quot;how&#39;s&quot;</code></pre>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="convolutional-neural-networks.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="meeting-videos-9.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="when-stopwords-removal-make-sense.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="stop-word-removal-in-r.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -289,7 +324,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/r4ds/bookclub-smltar/edit/main/10.Rmd",
+"link": "https://github.com/r4ds/bookclub-smltar/edit/main/03.Rmd",
 "text": "Edit"
 },
 "history": {

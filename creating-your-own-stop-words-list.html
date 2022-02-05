@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>10.1 Slide 1 | Supervised Machine Learning for Text Analysis in R Book Club</title>
+  <title>3.6 Creating your own stop words list | Supervised Machine Learning for Text Analysis in R Book Club</title>
   <meta name="description" content="This is the product of the R4DS Online Learning Community’s Supervised Machine Learning for Text Analysis in R Book Club." />
   <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="10.1 Slide 1 | Supervised Machine Learning for Text Analysis in R Book Club" />
+  <meta property="og:title" content="3.6 Creating your own stop words list | Supervised Machine Learning for Text Analysis in R Book Club" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="r4ds/bookclub-smltar" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="10.1 Slide 1 | Supervised Machine Learning for Text Analysis in R Book Club" />
+  <meta name="twitter:title" content="3.6 Creating your own stop words list | Supervised Machine Learning for Text Analysis in R Book Club" />
   
   <meta name="twitter:description" content="This is the product of the R4DS Online Learning Community’s Supervised Machine Learning for Text Analysis in R Book Club." />
   
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="convolutional-neural-networks.html"/>
-<link rel="next" href="meeting-videos-9.html"/>
+<link rel="prev" href="stop-word-removal-in-r.html"/>
+<link rel="next" href="stopwords-for-pidgin.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -245,20 +245,253 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="slide-1-6" class="section level2">
-<h2><span class="header-section-number">10.1</span> Slide 1</h2>
+<div id="creating-your-own-stop-words-list" class="section level2">
+<h2><span class="header-section-number">3.6</span> Creating your own stop words list</h2>
 <ul>
-<li>Add slides as sections (marked with <code>##</code>).</li>
-<li>Please give code chunks unique names (such as “01-something” for a block in chapter 1). This makes debugging much easier.</li>
+<li>We can create our own stopwords using monolingual corpus</li>
+<li>Monolingual corpus Vs Multilingual</li>
+<li>Using Fir-Tree dataset, let’s take the words and rank them by their count or frequency.</li>
 </ul>
+<div class="sourceCode" id="cb80"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb80-1"><a href="creating-your-own-stop-words-list.html#cb80-1"></a>tidy_fir_tree <span class="op">%&gt;%</span></span>
+<span id="cb80-2"><a href="creating-your-own-stop-words-list.html#cb80-2"></a><span class="st">  </span><span class="kw">count</span>(word, <span class="dt">sort =</span> <span class="ot">TRUE</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb80-3"><a href="creating-your-own-stop-words-list.html#cb80-3"></a><span class="st">  </span><span class="kw">slice</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">120</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb80-4"><a href="creating-your-own-stop-words-list.html#cb80-4"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">word =</span> <span class="kw">paste0</span>(<span class="kw">row_number</span>(), <span class="st">&quot;: &quot;</span>, word)) <span class="op">%&gt;%</span></span>
+<span id="cb80-5"><a href="creating-your-own-stop-words-list.html#cb80-5"></a><span class="st">  </span><span class="kw">pull</span>(word) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb80-6"><a href="creating-your-own-stop-words-list.html#cb80-6"></a><span class="st">  </span><span class="kw">columnize</span>()</span></code></pre></div>
+<style>p { font-family:'Roboto Condensed';font-size:12pt;line-height:12.5pt;padding:0;margin:0}</style>
+<div style="column-count:5">
+<p>1: the</p>
+<p>2: and</p>
+<p>3: tree</p>
+<p>4: it</p>
+<p>5: a</p>
+<p>6: in</p>
+<p>7: of</p>
+<p>8: to</p>
+<p>9: i</p>
+<p>10: was</p>
+<p>11: they</p>
+<p>12: fir</p>
+<p>13: were</p>
+<p>14: all</p>
+<p>15: with</p>
+<p>16: but</p>
+<p>17: on</p>
+<p>18: then</p>
+<p>19: had</p>
+<p>20: is</p>
+<p>21: at</p>
+<p>22: little</p>
+<p>23: so</p>
+<p>24: not</p>
+<p>25: said</p>
+<p>26: what</p>
+<p>27: as</p>
+<p>28: that</p>
+<p>29: he</p>
+<p>30: you</p>
+<p>31: its</p>
+<p>32: out</p>
+<p>33: be</p>
+<p>34: them</p>
+<p>35: this</p>
+<p>36: branches</p>
+<p>37: came</p>
+<p>38: for</p>
+<p>39: now</p>
+<p>40: one</p>
+<p>41: story</p>
+<p>42: would</p>
+<p>43: forest</p>
+<p>44: have</p>
+<p>45: how</p>
+<p>46: know</p>
+<p>47: thought</p>
+<p>48: mice</p>
+<p>49: trees</p>
+<p>50: we</p>
+<p>51: been</p>
+<p>52: down</p>
+<p>53: oh</p>
+<p>54: very</p>
+<p>55: when</p>
+<p>56: where</p>
+<p>57: who</p>
+<p>58: children</p>
+<p>59: dumpty</p>
+<p>60: humpty</p>
+<p>61: or</p>
+<p>62: shall</p>
+<p>63: there</p>
+<p>64: while</p>
+<p>65: will</p>
+<p>66: after</p>
+<p>67: by</p>
+<p>68: come</p>
+<p>69: happy</p>
+<p>70: my</p>
+<p>71: old</p>
+<p>72: only</p>
+<p>73: their</p>
+<p>74: which</p>
+<p>75: again</p>
+<p>76: am</p>
+<p>77: are</p>
+<p>78: beautiful</p>
+<p>79: evening</p>
+<p>80: him</p>
+<p>81: like</p>
+<p>82: me</p>
+<p>83: more</p>
+<p>84: about</p>
+<p>85: christmas</p>
+<p>86: do</p>
+<p>87: fell</p>
+<p>88: fresh</p>
+<p>89: from</p>
+<p>90: here</p>
+<p>91: last</p>
+<p>92: much</p>
+<p>93: no</p>
+<p>94: princess</p>
+<p>95: tall</p>
+<p>96: young</p>
+<p>97: asked</p>
+<p>98: can</p>
+<p>99: could</p>
+<p>100: cried</p>
+<p>101: going</p>
+<p>102: grew</p>
+<p>103: if</p>
+<p>104: large</p>
+<p>105: looked</p>
+<p>106: made</p>
+<p>107: many</p>
+<p>108: seen</p>
+<p>109: stairs</p>
+<p>110: think</p>
+<p>111: too</p>
+<p>112: up</p>
+<p>113: yes</p>
+<p>114: air</p>
+<p>115: also</p>
+<p>116: away</p>
+<p>117: birds</p>
+<p>118: corner</p>
+<p>119: cut</p>
+<p>120: did</p>
+</div>
+<ul>
+<li>this has “three” as stopwords which does not make sense.</li>
+<li>How can we solve this issue?
+-Use large corpus will give a descent one
+Use multiple genre subject-specific corpus. Stopwords can then be intersection of stopwords in each corpus.
+Leveraging languages speakers and domain expert</li>
+</ul>
+<div class="sourceCode" id="cb81"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb81-1"><a href="creating-your-own-stop-words-list.html#cb81-1"></a>yo &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;https://raw.githubusercontent.com/Niger-Volta-LTI/yoruba-text/master/Alabi_YorubaTwi_Embedding/alakowe.txt&quot;</span>, <span class="dt">col_names =</span> <span class="ot">FALSE</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb81-2"><a href="creating-your-own-stop-words-list.html#cb81-2"></a><span class="st">  </span><span class="kw">select</span>(<span class="dv">1</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb81-3"><a href="creating-your-own-stop-words-list.html#cb81-3"></a><span class="st">  </span><span class="kw">rename</span>(<span class="dt">text =</span> <span class="dv">1</span>)</span>
+<span id="cb81-4"><a href="creating-your-own-stop-words-list.html#cb81-4"></a></span>
+<span id="cb81-5"><a href="creating-your-own-stop-words-list.html#cb81-5"></a><span class="co"># Mean Frequency</span></span>
+<span id="cb81-6"><a href="creating-your-own-stop-words-list.html#cb81-6"></a>yo1_stop_mean &lt;-<span class="st">  </span>yo <span class="op">%&gt;%</span></span>
+<span id="cb81-7"><a href="creating-your-own-stop-words-list.html#cb81-7"></a><span class="st">  </span><span class="kw">unnest_tokens</span>(word, text) <span class="op">%&gt;%</span></span>
+<span id="cb81-8"><a href="creating-your-own-stop-words-list.html#cb81-8"></a><span class="st">  </span><span class="kw">count</span>(word, <span class="dt">sort =</span> <span class="ot">TRUE</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb81-9"><a href="creating-your-own-stop-words-list.html#cb81-9"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">mean_frequency =</span> n<span class="op">/</span><span class="kw">nrow</span>(yo)) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb81-10"><a href="creating-your-own-stop-words-list.html#cb81-10"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">rank_freq =</span> <span class="kw">row_number</span>()) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb81-11"><a href="creating-your-own-stop-words-list.html#cb81-11"></a><span class="st">  </span><span class="kw">filter</span>(n <span class="op">&gt;</span><span class="dv">2</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb81-12"><a href="creating-your-own-stop-words-list.html#cb81-12"></a><span class="st">  </span><span class="kw">select</span>(word) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb81-13"><a href="creating-your-own-stop-words-list.html#cb81-13"></a><span class="st">  </span><span class="kw">slice</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">20</span>)</span>
+<span id="cb81-14"><a href="creating-your-own-stop-words-list.html#cb81-14"></a></span>
+<span id="cb81-15"><a href="creating-your-own-stop-words-list.html#cb81-15"></a>yo1_stop_mean </span></code></pre></div>
+<pre><code>## # A tibble: 20 × 1
+##    word 
+##    &lt;chr&gt;
+##  1 ni   
+##  2 tí   
+##  3 àwọn 
+##  4 ní   
+##  5 wọ́n  
+##  6 ó    
+##  7 ti   
+##  8 náà  
+##  9 tó   
+## 10 a    
+## 11 ṣe   
+## 12 pé   
+## 13 yìí  
+## 14 sí   
+## 15 bá   
+## 16 ń    
+## 17 àti  
+## 18 mo   
+## 19 máa  
+## 20 fún</code></pre>
+<div class="sourceCode" id="cb83"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb83-1"><a href="creating-your-own-stop-words-list.html#cb83-1"></a>yo_two &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;https://raw.githubusercontent.com/Niger-Volta-LTI/yoruba-text/master/Alabi_YorubaTwi_Embedding/edeyorubarewa.txt&quot;</span>, <span class="dt">col_names =</span> <span class="ot">FALSE</span>)<span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb83-2"><a href="creating-your-own-stop-words-list.html#cb83-2"></a><span class="st">  </span><span class="kw">select</span>(<span class="dv">1</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb83-3"><a href="creating-your-own-stop-words-list.html#cb83-3"></a><span class="st">  </span><span class="kw">rename</span>(<span class="dt">text =</span> <span class="dv">1</span>)</span>
+<span id="cb83-4"><a href="creating-your-own-stop-words-list.html#cb83-4"></a></span>
+<span id="cb83-5"><a href="creating-your-own-stop-words-list.html#cb83-5"></a><span class="co"># Mean Frequency</span></span>
+<span id="cb83-6"><a href="creating-your-own-stop-words-list.html#cb83-6"></a>yo_two_stop &lt;-<span class="st">  </span>yo_two <span class="op">%&gt;%</span></span>
+<span id="cb83-7"><a href="creating-your-own-stop-words-list.html#cb83-7"></a><span class="st"> </span><span class="kw">unnest_tokens</span>(word, text) <span class="op">%&gt;%</span></span>
+<span id="cb83-8"><a href="creating-your-own-stop-words-list.html#cb83-8"></a><span class="st">  </span><span class="kw">count</span>(word, <span class="dt">sort =</span> <span class="ot">TRUE</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb83-9"><a href="creating-your-own-stop-words-list.html#cb83-9"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">mean_frequency =</span> n<span class="op">/</span><span class="kw">nrow</span>(yo_two)) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb83-10"><a href="creating-your-own-stop-words-list.html#cb83-10"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">rank_freq =</span> <span class="kw">row_number</span>()) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb83-11"><a href="creating-your-own-stop-words-list.html#cb83-11"></a><span class="st">  </span><span class="kw">filter</span>(n <span class="op">&gt;</span><span class="dv">2</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb83-12"><a href="creating-your-own-stop-words-list.html#cb83-12"></a><span class="st">  </span><span class="kw">select</span>(word) <span class="op">%&gt;%</span></span>
+<span id="cb83-13"><a href="creating-your-own-stop-words-list.html#cb83-13"></a><span class="st">  </span><span class="kw">slice</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">20</span>)</span>
+<span id="cb83-14"><a href="creating-your-own-stop-words-list.html#cb83-14"></a>  </span>
+<span id="cb83-15"><a href="creating-your-own-stop-words-list.html#cb83-15"></a>yo_two_stop</span></code></pre></div>
+<pre><code>## # A tibble: 20 × 1
+##    word 
+##    &lt;chr&gt;
+##  1 tí   
+##  2 ni   
+##  3 ó    
+##  4 ń    
+##  5 àwọn 
+##  6 ní   
+##  7 yìí  
+##  8 ẹ    
+##  9 kí   
+## 10 fún  
+## 11 ọba  
+## 12 a    
+## 13 pé   
+## 14 sí   
+## 15 bá   
+## 16 ṣe   
+## 17 bí   
+## 18 tó   
+## 19 mo   
+## 20 ti</code></pre>
+<div class="sourceCode" id="cb85"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb85-1"><a href="creating-your-own-stop-words-list.html#cb85-1"></a><span class="kw">intersect</span>(yo_two_stop,yo1_stop_mean) </span></code></pre></div>
+<pre><code>## # A tibble: 16 × 1
+##    word 
+##    &lt;chr&gt;
+##  1 tí   
+##  2 ni   
+##  3 ó    
+##  4 ń    
+##  5 àwọn 
+##  6 ní   
+##  7 yìí  
+##  8 fún  
+##  9 a    
+## 10 pé   
+## 11 sí   
+## 12 bá   
+## 13 ṣe   
+## 14 tó   
+## 15 mo   
+## 16 ti</code></pre>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="convolutional-neural-networks.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="meeting-videos-9.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="stop-word-removal-in-r.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="stopwords-for-pidgin.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -289,7 +522,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/r4ds/bookclub-smltar/edit/main/10.Rmd",
+"link": "https://github.com/r4ds/bookclub-smltar/edit/main/03.Rmd",
 "text": "Edit"
 },
 "history": {

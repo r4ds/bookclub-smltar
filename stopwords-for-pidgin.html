@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>10.1 Slide 1 | Supervised Machine Learning for Text Analysis in R Book Club</title>
+  <title>3.7 Stopwords for Pidgin | Supervised Machine Learning for Text Analysis in R Book Club</title>
   <meta name="description" content="This is the product of the R4DS Online Learning Community’s Supervised Machine Learning for Text Analysis in R Book Club." />
   <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="10.1 Slide 1 | Supervised Machine Learning for Text Analysis in R Book Club" />
+  <meta property="og:title" content="3.7 Stopwords for Pidgin | Supervised Machine Learning for Text Analysis in R Book Club" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="r4ds/bookclub-smltar" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="10.1 Slide 1 | Supervised Machine Learning for Text Analysis in R Book Club" />
+  <meta name="twitter:title" content="3.7 Stopwords for Pidgin | Supervised Machine Learning for Text Analysis in R Book Club" />
   
   <meta name="twitter:description" content="This is the product of the R4DS Online Learning Community’s Supervised Machine Learning for Text Analysis in R Book Club." />
   
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="convolutional-neural-networks.html"/>
-<link rel="next" href="meeting-videos-9.html"/>
+<link rel="prev" href="creating-your-own-stop-words-list.html"/>
+<link rel="next" href="how-many-words-do-we-include-in-our-stop-word-list.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -245,20 +245,74 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="slide-1-6" class="section level2">
-<h2><span class="header-section-number">10.1</span> Slide 1</h2>
+<div id="stopwords-for-pidgin" class="section level2">
+<h2><span class="header-section-number">3.7</span> Stopwords for Pidgin</h2>
 <ul>
-<li>Add slides as sections (marked with <code>##</code>).</li>
-<li>Please give code chunks unique names (such as “01-something” for a block in chapter 1). This makes debugging much easier.</li>
+<li><p>Pidgin is an English-based creole language spoken as a lingua franca</p></li>
+<li><p>Nigerian Pidgin (Naija) is an English-based creole language spoken across Nigeria</p></li>
+<li><p>For example, “Dis food sweet well, well/Dis food sweet no be smal” in Pidgin English translates to “This meal is delicious”</p></li>
 </ul>
+<div class="sourceCode" id="cb87"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb87-1"><a href="stopwords-for-pidgin.html#cb87-1"></a>dic &lt;-<span class="st"> </span><span class="kw">enframe</span>(<span class="kw">read_rds</span>(<span class="st">&quot;data/wiktionary_words.rds&quot;</span>)) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb87-2"><a href="stopwords-for-pidgin.html#cb87-2"></a><span class="st">  </span><span class="kw">rename</span>(<span class="dt">words =</span> value) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb87-3"><a href="stopwords-for-pidgin.html#cb87-3"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">word =</span> <span class="kw">str_extract_all</span>(words, <span class="kw">boundary</span>(<span class="st">&quot;word&quot;</span>)) ) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb87-4"><a href="stopwords-for-pidgin.html#cb87-4"></a><span class="st">  </span><span class="kw">unnest</span>(word) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb87-5"><a href="stopwords-for-pidgin.html#cb87-5"></a><span class="st">  </span><span class="kw">select</span>(word) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb87-6"><a href="stopwords-for-pidgin.html#cb87-6"></a><span class="st">  </span><span class="kw">arrange</span>(word) </span></code></pre></div>
+<div class="sourceCode" id="cb88"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb88-1"><a href="stopwords-for-pidgin.html#cb88-1"></a>Piding &lt;-<span class="st"> </span><span class="kw">read_tsv</span>(<span class="st">&quot;https://raw.githubusercontent.com/keleog/PidginUNMT/master/corpus/monolingual/pidgin_corpus.txt&quot;</span>, <span class="dt">col_names =</span> <span class="ot">FALSE</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb88-2"><a href="stopwords-for-pidgin.html#cb88-2"></a><span class="st">  </span><span class="kw">rename</span>(<span class="dt">text =</span> <span class="dv">1</span>)</span>
+<span id="cb88-3"><a href="stopwords-for-pidgin.html#cb88-3"></a></span>
+<span id="cb88-4"><a href="stopwords-for-pidgin.html#cb88-4"></a>Piding <span class="op">%&gt;%</span></span>
+<span id="cb88-5"><a href="stopwords-for-pidgin.html#cb88-5"></a><span class="st">  </span><span class="kw">unnest_tokens</span>(word, text) <span class="op">%&gt;%</span></span>
+<span id="cb88-6"><a href="stopwords-for-pidgin.html#cb88-6"></a><span class="st">  </span><span class="kw">count</span>(word, <span class="dt">sort =</span> <span class="ot">TRUE</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb88-7"><a href="stopwords-for-pidgin.html#cb88-7"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">mean_frequency =</span> n<span class="op">/</span><span class="kw">nrow</span>(Piding)) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb88-8"><a href="stopwords-for-pidgin.html#cb88-8"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">rank_freq =</span> <span class="kw">row_number</span>()) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb88-9"><a href="stopwords-for-pidgin.html#cb88-9"></a><span class="st">  </span><span class="kw">filter</span>(n <span class="op">&gt;</span><span class="dv">2</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb88-10"><a href="stopwords-for-pidgin.html#cb88-10"></a><span class="st">  </span><span class="kw">select</span>(word) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb88-11"><a href="stopwords-for-pidgin.html#cb88-11"></a><span class="st">  </span><span class="kw">head</span>(<span class="dv">10</span>)</span></code></pre></div>
+<pre><code>## # A tibble: 10 × 1
+##    word 
+##    &lt;chr&gt;
+##  1 for  
+##  2 dey  
+##  3 say  
+##  4 wey  
+##  5 di   
+##  6 the  
+##  7 and  
+##  8 dem  
+##  9 to   
+## 10 of</code></pre>
+<div class="sourceCode" id="cb90"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb90-1"><a href="stopwords-for-pidgin.html#cb90-1"></a>Piding <span class="op">%&gt;%</span></span>
+<span id="cb90-2"><a href="stopwords-for-pidgin.html#cb90-2"></a><span class="st">  </span><span class="kw">unnest_tokens</span>(word, text) <span class="op">%&gt;%</span></span>
+<span id="cb90-3"><a href="stopwords-for-pidgin.html#cb90-3"></a><span class="st">  </span><span class="kw">count</span>(word, <span class="dt">sort =</span> <span class="ot">TRUE</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb90-4"><a href="stopwords-for-pidgin.html#cb90-4"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">mean_frequency =</span> n<span class="op">/</span><span class="kw">nrow</span>(Piding)) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb90-5"><a href="stopwords-for-pidgin.html#cb90-5"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">rank_freq =</span> <span class="kw">row_number</span>()) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb90-6"><a href="stopwords-for-pidgin.html#cb90-6"></a><span class="st">  </span><span class="kw">filter</span>(n <span class="op">&gt;</span><span class="dv">2</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb90-7"><a href="stopwords-for-pidgin.html#cb90-7"></a><span class="st">  </span><span class="kw">select</span>(word)<span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb90-8"><a href="stopwords-for-pidgin.html#cb90-8"></a><span class="st">  </span><span class="kw">anti_join</span>(dic) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb90-9"><a href="stopwords-for-pidgin.html#cb90-9"></a><span class="st">  </span><span class="kw">head</span>(<span class="dv">10</span>)</span></code></pre></div>
+<pre><code>## Joining, by = &quot;word&quot;</code></pre>
+<pre><code>## # A tibble: 10 × 1
+##    word   
+##    &lt;chr&gt;  
+##  1 pipo   
+##  2 nigeria
+##  3 tok    
+##  4 wetin  
+##  5 buhari 
+##  6 goment 
+##  7 comot  
+##  8 pikin  
+##  9 pesin  
+## 10 apc</code></pre>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="convolutional-neural-networks.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="meeting-videos-9.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="creating-your-own-stop-words-list.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="how-many-words-do-we-include-in-our-stop-word-list.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -289,7 +343,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/r4ds/bookclub-smltar/edit/main/10.Rmd",
+"link": "https://github.com/r4ds/bookclub-smltar/edit/main/03.Rmd",
 "text": "Edit"
 },
 "history": {

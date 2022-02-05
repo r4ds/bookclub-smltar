@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>3.1 Slide 1 | Supervised Machine Learning for Text Analysis in R Book Club</title>
+  <title>4.1 Slide 1 | Supervised Machine Learning for Text Analysis in R Book Club</title>
   <meta name="description" content="This is the product of the R4DS Online Learning Community’s Supervised Machine Learning for Text Analysis in R Book Club." />
   <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="3.1 Slide 1 | Supervised Machine Learning for Text Analysis in R Book Club" />
+  <meta property="og:title" content="4.1 Slide 1 | Supervised Machine Learning for Text Analysis in R Book Club" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="r4ds/bookclub-smltar" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="3.1 Slide 1 | Supervised Machine Learning for Text Analysis in R Book Club" />
+  <meta name="twitter:title" content="4.1 Slide 1 | Supervised Machine Learning for Text Analysis in R Book Club" />
   
   <meta name="twitter:description" content="This is the product of the R4DS Online Learning Community’s Supervised Machine Learning for Text Analysis in R Book Club." />
   
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="stop-words.html"/>
-<link rel="next" href="meeting-videos-2.html"/>
+<link rel="prev" href="stemming.html"/>
+<link rel="next" href="meeting-videos-3.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -169,49 +169,58 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="stop-words.html"><a href="stop-words.html"><i class="fa fa-check"></i><b>3</b> Stop words</a><ul>
-<li class="chapter" data-level="3.1" data-path="slide-1.html"><a href="slide-1.html"><i class="fa fa-check"></i><b>3.1</b> Slide 1</a></li>
-<li class="chapter" data-level="3.2" data-path="meeting-videos-2.html"><a href="meeting-videos-2.html"><i class="fa fa-check"></i><b>3.2</b> Meeting Videos</a><ul>
-<li class="chapter" data-level="3.2.1" data-path="meeting-videos-2.html"><a href="meeting-videos-2.html#cohort-1-2"><i class="fa fa-check"></i><b>3.2.1</b> Cohort 1</a></li>
+<li class="chapter" data-level="3.1" data-path="what-are-stop-words.html"><a href="what-are-stop-words.html"><i class="fa fa-check"></i><b>3.1</b> What are stop-words</a></li>
+<li class="chapter" data-level="3.2" data-path="why-do-we-remove-them.html"><a href="why-do-we-remove-them.html"><i class="fa fa-check"></i><b>3.2</b> Why do we remove them</a></li>
+<li class="chapter" data-level="3.3" data-path="when-stopwords-removal-make-sense.html"><a href="when-stopwords-removal-make-sense.html"><i class="fa fa-check"></i><b>3.3</b> When stopwords removal make sense?</a></li>
+<li class="chapter" data-level="3.4" data-path="using-off-the-shelf-stop-word-lists.html"><a href="using-off-the-shelf-stop-word-lists.html"><i class="fa fa-check"></i><b>3.4</b> Using off-the-shelf stop word lists</a></li>
+<li class="chapter" data-level="3.5" data-path="stop-word-removal-in-r.html"><a href="stop-word-removal-in-r.html"><i class="fa fa-check"></i><b>3.5</b> Stop word removal in R</a></li>
+<li class="chapter" data-level="3.6" data-path="creating-your-own-stop-words-list.html"><a href="creating-your-own-stop-words-list.html"><i class="fa fa-check"></i><b>3.6</b> Creating your own stop words list</a></li>
+<li class="chapter" data-level="3.7" data-path="stopwords-for-pidgin.html"><a href="stopwords-for-pidgin.html"><i class="fa fa-check"></i><b>3.7</b> Stopwords for Pidgin</a></li>
+<li class="chapter" data-level="3.8" data-path="how-many-words-do-we-include-in-our-stop-word-list.html"><a href="how-many-words-do-we-include-in-our-stop-word-list.html"><i class="fa fa-check"></i><b>3.8</b> How many words do we include in our stop word list?</a></li>
+<li class="chapter" data-level="3.9" data-path="all-stop-word-lists-are-context-specific.html"><a href="all-stop-word-lists-are-context-specific.html"><i class="fa fa-check"></i><b>3.9</b> All stop word lists are context-specific</a></li>
+<li class="chapter" data-level="3.10" data-path="problem-with-off-the-shelf-stopwords.html"><a href="problem-with-off-the-shelf-stopwords.html"><i class="fa fa-check"></i><b>3.10</b> Problem with off-the-shelf stopwords</a></li>
+<li class="chapter" data-level="3.11" data-path="meeting-videos-2.html"><a href="meeting-videos-2.html"><i class="fa fa-check"></i><b>3.11</b> Meeting Videos</a><ul>
+<li class="chapter" data-level="3.11.1" data-path="meeting-videos-2.html"><a href="meeting-videos-2.html#cohort-1-2"><i class="fa fa-check"></i><b>3.11.1</b> Cohort 1</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="stemming.html"><a href="stemming.html"><i class="fa fa-check"></i><b>4</b> Stemming</a><ul>
-<li class="chapter" data-level="4.1" data-path="slide-1-1.html"><a href="slide-1-1.html"><i class="fa fa-check"></i><b>4.1</b> Slide 1</a></li>
+<li class="chapter" data-level="4.1" data-path="slide-1.html"><a href="slide-1.html"><i class="fa fa-check"></i><b>4.1</b> Slide 1</a></li>
 <li class="chapter" data-level="4.2" data-path="meeting-videos-3.html"><a href="meeting-videos-3.html"><i class="fa fa-check"></i><b>4.2</b> Meeting Videos</a><ul>
 <li class="chapter" data-level="4.2.1" data-path="meeting-videos-3.html"><a href="meeting-videos-3.html#cohort-1-3"><i class="fa fa-check"></i><b>4.2.1</b> Cohort 1</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="word-embeddings.html"><a href="word-embeddings.html"><i class="fa fa-check"></i><b>5</b> Word Embeddings</a><ul>
-<li class="chapter" data-level="5.1" data-path="slide-1-2.html"><a href="slide-1-2.html"><i class="fa fa-check"></i><b>5.1</b> Slide 1</a></li>
+<li class="chapter" data-level="5.1" data-path="slide-1-1.html"><a href="slide-1-1.html"><i class="fa fa-check"></i><b>5.1</b> Slide 1</a></li>
 <li class="chapter" data-level="5.2" data-path="meeting-videos-4.html"><a href="meeting-videos-4.html"><i class="fa fa-check"></i><b>5.2</b> Meeting Videos</a><ul>
 <li class="chapter" data-level="5.2.1" data-path="meeting-videos-4.html"><a href="meeting-videos-4.html#cohort-1-4"><i class="fa fa-check"></i><b>5.2.1</b> Cohort 1</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="regression.html"><a href="regression.html"><i class="fa fa-check"></i><b>6</b> Regression</a><ul>
-<li class="chapter" data-level="6.1" data-path="slide-1-3.html"><a href="slide-1-3.html"><i class="fa fa-check"></i><b>6.1</b> Slide 1</a></li>
+<li class="chapter" data-level="6.1" data-path="slide-1-2.html"><a href="slide-1-2.html"><i class="fa fa-check"></i><b>6.1</b> Slide 1</a></li>
 <li class="chapter" data-level="6.2" data-path="meeting-videos-5.html"><a href="meeting-videos-5.html"><i class="fa fa-check"></i><b>6.2</b> Meeting Videos</a><ul>
 <li class="chapter" data-level="6.2.1" data-path="meeting-videos-5.html"><a href="meeting-videos-5.html#cohort-1-5"><i class="fa fa-check"></i><b>6.2.1</b> Cohort 1</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="7" data-path="classification.html"><a href="classification.html"><i class="fa fa-check"></i><b>7</b> Classification</a><ul>
-<li class="chapter" data-level="7.1" data-path="slide-1-4.html"><a href="slide-1-4.html"><i class="fa fa-check"></i><b>7.1</b> Slide 1</a></li>
+<li class="chapter" data-level="7.1" data-path="slide-1-3.html"><a href="slide-1-3.html"><i class="fa fa-check"></i><b>7.1</b> Slide 1</a></li>
 <li class="chapter" data-level="7.2" data-path="meeting-videos-6.html"><a href="meeting-videos-6.html"><i class="fa fa-check"></i><b>7.2</b> Meeting Videos</a><ul>
 <li class="chapter" data-level="7.2.1" data-path="meeting-videos-6.html"><a href="meeting-videos-6.html#cohort-1-6"><i class="fa fa-check"></i><b>7.2.1</b> Cohort 1</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="8" data-path="dense-neural-networks.html"><a href="dense-neural-networks.html"><i class="fa fa-check"></i><b>8</b> Dense neural networks</a><ul>
-<li class="chapter" data-level="8.1" data-path="slide-1-5.html"><a href="slide-1-5.html"><i class="fa fa-check"></i><b>8.1</b> Slide 1</a></li>
+<li class="chapter" data-level="8.1" data-path="slide-1-4.html"><a href="slide-1-4.html"><i class="fa fa-check"></i><b>8.1</b> Slide 1</a></li>
 <li class="chapter" data-level="8.2" data-path="meeting-videos-7.html"><a href="meeting-videos-7.html"><i class="fa fa-check"></i><b>8.2</b> Meeting Videos</a><ul>
 <li class="chapter" data-level="8.2.1" data-path="meeting-videos-7.html"><a href="meeting-videos-7.html#cohort-1-7"><i class="fa fa-check"></i><b>8.2.1</b> Cohort 1</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="9" data-path="long-short-term-memory-lstm-networks.html"><a href="long-short-term-memory-lstm-networks.html"><i class="fa fa-check"></i><b>9</b> Long short-term memory (LSTM) networks</a><ul>
-<li class="chapter" data-level="9.1" data-path="slide-1-6.html"><a href="slide-1-6.html"><i class="fa fa-check"></i><b>9.1</b> Slide 1</a></li>
+<li class="chapter" data-level="9.1" data-path="slide-1-5.html"><a href="slide-1-5.html"><i class="fa fa-check"></i><b>9.1</b> Slide 1</a></li>
 <li class="chapter" data-level="9.2" data-path="meeting-videos-8.html"><a href="meeting-videos-8.html"><i class="fa fa-check"></i><b>9.2</b> Meeting Videos</a><ul>
 <li class="chapter" data-level="9.2.1" data-path="meeting-videos-8.html"><a href="meeting-videos-8.html#cohort-1-8"><i class="fa fa-check"></i><b>9.2.1</b> Cohort 1</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="10" data-path="convolutional-neural-networks.html"><a href="convolutional-neural-networks.html"><i class="fa fa-check"></i><b>10</b> Convolutional neural networks</a><ul>
-<li class="chapter" data-level="10.1" data-path="slide-1-7.html"><a href="slide-1-7.html"><i class="fa fa-check"></i><b>10.1</b> Slide 1</a></li>
+<li class="chapter" data-level="10.1" data-path="slide-1-6.html"><a href="slide-1-6.html"><i class="fa fa-check"></i><b>10.1</b> Slide 1</a></li>
 <li class="chapter" data-level="10.2" data-path="meeting-videos-9.html"><a href="meeting-videos-9.html"><i class="fa fa-check"></i><b>10.2</b> Meeting Videos</a><ul>
 <li class="chapter" data-level="10.2.1" data-path="meeting-videos-9.html"><a href="meeting-videos-9.html#cohort-1-9"><i class="fa fa-check"></i><b>10.2.1</b> Cohort 1</a></li>
 </ul></li>
@@ -237,7 +246,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
             <section class="normal" id="section-">
 <div id="slide-1" class="section level2">
-<h2><span class="header-section-number">3.1</span> Slide 1</h2>
+<h2><span class="header-section-number">4.1</span> Slide 1</h2>
 <ul>
 <li>Add slides as sections (marked with <code>##</code>).</li>
 <li>Please give code chunks unique names (such as “01-something” for a block in chapter 1). This makes debugging much easier.</li>
@@ -248,8 +257,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           </div>
         </div>
       </div>
-<a href="stop-words.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="meeting-videos-2.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="stemming.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="meeting-videos-3.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -280,7 +289,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/r4ds/bookclub-smltar/edit/main/03.Rmd",
+"link": "https://github.com/r4ds/bookclub-smltar/edit/main/04.Rmd",
 "text": "Edit"
 },
 "history": {
