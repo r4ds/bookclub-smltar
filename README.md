@@ -20,6 +20,10 @@ If you would like to present, please add your name next to a chapter using the [
 
 - 2022-01-14: Introduction - Shamsuddeen
 - 2022-01-14: Chapter 1 (Language and modeling) - Layla Bouzoubaa.
+- 2022-01-21: Tokenization -  Jiwan
+- 2022-01-28: Stopwords -  Shamsuddeen.
+- 2022-02-04: Stemming -  .
+
 
 
 <hr>
