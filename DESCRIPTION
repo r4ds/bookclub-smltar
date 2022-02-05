@@ -15,7 +15,7 @@ Imports:
     hcandersenr,
     bookdown,
     janeaustenr,
-    quanteeda,
+    quanteda,
     rmarkdown,
     shiny,
     tidytext,

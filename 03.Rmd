@@ -15,7 +15,7 @@
 
 - So, we need to pre-process our data and remove those words with little or no information
 
-```{r echo=FALSE, out.width = "100%", message=TRUE, warning=FALSE, paged.print=FALSE}
+```{r 03-stopwords-intro, echo=FALSE, out.width = "100%", message=TRUE, warning=FALSE, paged.print=FALSE}
 knitr::include_graphics("img/stopwords.png")
 
 ```
@@ -23,8 +23,7 @@ knitr::include_graphics("img/stopwords.png")
 > The process of converting data to something a computer can understand is referred to as pre-processing. One of the major forms of pre-processing is to filter out useless data. In natural language processing, useless words (data), are referred to as stop words.
 
 
-
-## Why do we removed them
+## Why do we remove them
 
 - Stopwords take up space and valuable processing time. 
 
@@ -36,10 +35,8 @@ knitr::include_graphics("img/stopwords.png")
 ## When stopwords removal make sense?
 
 -  Removal of stopwords depends on the task you are solving.      
-  
 
 - There is no hard and fast rule on when to remove stop words. But we should remove stop words if our task is one of Language Classification, Spam Filtering, Caption Generation, Auto-Tag Generation, Sentiment analysis, or something that is related to text classification
-
 
 - On the other hand, if our task is one of Machine Translation, Question-Answering problems, Text Summarization, Language Modeling, it’s better not to remove the stop words as they are a crucial part of these applications
 
@@ -53,7 +50,7 @@ knitr::include_graphics("img/stopwords.png")
 
 - So, what kind of stopwords to inlude depend on the task at hand?
 
-- it’s better to keep these words and do some tests with and without them so see how it affects the model and you should never remove stop words without thinking about the impact of these words on the problem you are trying to solve.
+- it’s better to keep these words and do some tests with and without them to see how it affects the model and you should never remove stop words without thinking about the impact of these words on the problem you are trying to solve.
 
 
 ##  Using off-the-shelf stop word lists
@@ -64,36 +61,32 @@ knitr::include_graphics("img/stopwords.png")
 
 - Quanteda provides multilingual stopwords
 
-```{r  message=FALSE, warning=FALSE}
+```{r 03-stopwords-sources, message=FALSE, warning=FALSE}
 library(quanteda)
 stopwords::stopwords_getsources()
 ```
 
 - Get languages supported by a stopwords
 
-```{r }
+```{r 03-snowball}
 stopwords::stopwords_getlanguages("snowball")
-
 ```
 
-```{r}
+```{r 03-nltk}
 stopwords::stopwords_getlanguages("nltk")
-
 ```
 
-```{r}
+```{r 03-iso}
 stopwords::stopwords_getlanguages("stopwords-iso")
-
 ```
 
 - Default stopword in Quanteeda is snowball. Why?
 
 
-```{r}
+```{r 03-source-comparisons}
 length(stopwords::stopwords(source = "smart"))
 length(stopwords::stopwords(source = "snowball"))
 length(stopwords::stopwords(source = "stopwords-iso"))
-
 ```
 
 
@@ -101,7 +94,7 @@ length(stopwords::stopwords(source = "stopwords-iso"))
 
 - Bt, words that appear in Snowball and ISO but not in the SMART list.
 
-```{r}
+```{r 03-snowball-vs-smart}
 setdiff(stopwords(source = "snowball"),
         stopwords(source = "smart"))
 ```
@@ -109,7 +102,7 @@ setdiff(stopwords(source = "snowball"),
 ## Stop word removal in R
 
 
-```{r  message=FALSE, warning=FALSE}
+```{r 03-fir, message=FALSE, warning=FALSE}
 library(hcandersenr)
 library(tidyverse)
 library(tidytext)
@@ -121,25 +114,7 @@ fir_tree <- hca_fairytales() %>%
 fir_tree
 ```
 
-```{r include=FALSE}
-columnize <- function(words, ncol = 5,
-                      style = "p { font-family:'Roboto Condensed';font-size:12pt;line-height:12.5pt;padding:0;margin:0}") {
-
-  tagList(
-    tags$style(style),
-    tags$div(
-      words %>%
-        map(tags$p) %>%
-        tagList(),
-      style = sprintf("column-count:%d", as.integer(ncol))
-    )
-  )
-
-}
-```
-
-
-```{r}
+```{r 03-tidy-fir}
 tidy_fir_tree <- fir_tree %>%
   unnest_tokens(word, text)
 
@@ -147,16 +122,15 @@ tidy_fir_tree
 ```
 - Stopwords that return vector
 
-```{r message=FALSE, warning=FALSE}
+```{r 03-fir-filter, message=FALSE, warning=FALSE}
 tidy_fir_tree %>%
   filter(!(word %in% stopwords(source = "snowball")))
-
 ```
 
 - If we use the get_stopwords() function from tidytext instead, then we can use the anti_join() function.
 
 
-```{r}
+```{r 03-fir-antijoin}
 tidy_fir_tree %>%
   anti_join(get_stopwords(source = "snowball"))
 ```
@@ -164,7 +138,7 @@ tidy_fir_tree %>%
 - It is perfectly acceptable to start with a premade word list and remove or append additional words according to your particular use case.
 
 
-```{r include=FALSE}
+```{r 03-columnize-setup, include=FALSE}
 library(shiny)
 
 columnize <- function(words, ncol = 5,
@@ -184,19 +158,17 @@ columnize <- function(words, ncol = 5,
 ```
 
 
-
 - adding to the built-in stopword list
 
-```{r}
+```{r 03-toks}
 toks <- tokens("The judge will sentence Mr. Adams to nine years in 
                prison", remove_punct = TRUE)
 toks
-
 ```
 
 - adding : "will", "mr", "nine"
 
-```{r}
+```{r 03-additional-stops}
 tokens_remove(toks, c(stopwords("english"), "will", "mr", "nine"))
 ```
 
@@ -206,7 +178,7 @@ tokens_remove(toks, c(stopwords("english"), "will", "mr", "nine"))
 - Monolingual corpus Vs Multilingual 
 - Using Fir-Tree dataset, let’s take the words and rank them by their count or frequency.
 
-```{r, eval=knitr:::is_html_output(), echo=TRUE, results='markup'}
+```{r 03-columnize-output, eval=knitr:::is_html_output(), echo=TRUE, results='markup'}
 tidy_fir_tree %>%
   count(word, sort = TRUE) %>% 
   slice(1:120) %>% 
@@ -217,13 +189,12 @@ tidy_fir_tree %>%
 
 - this has "three" as stopwords which does not make sense.
 - How can we solve this issue?
-
-    - Use large corpus will give a descent one
-    - Use multiple genre subject-specific corpus. Stopwords can then be intersection of stopwords in each corpus.
-    - Leveraging languages speakers and domain expert
+  -Use large corpus will give a descent one
+  Use multiple genre subject-specific corpus. Stopwords can then be intersection of stopwords in each corpus.
+  Leveraging languages speakers and domain expert
  
  
-```{r message=FALSE, warning=FALSE}
+```{r 03-yo1, message=FALSE, warning=FALSE}
 yo <- read_csv("https://raw.githubusercontent.com/Niger-Volta-LTI/yoruba-text/master/Alabi_YorubaTwi_Embedding/alakowe.txt", col_names = FALSE) %>% 
   select(1) %>% 
   rename(text = 1)
@@ -238,15 +209,12 @@ yo1_stop_mean <-  yo %>%
   select(word) %>% 
   slice(1:20)
 
-
-
 yo1_stop_mean 
 ```
  
 
 
-```{r message=FALSE, warning=FALSE}
-
+```{r 03-yo2, message=FALSE, warning=FALSE}
 yo_two <- read_csv("https://raw.githubusercontent.com/Niger-Volta-LTI/yoruba-text/master/Alabi_YorubaTwi_Embedding/edeyorubarewa.txt", col_names = FALSE)%>% 
   select(1) %>% 
   rename(text = 1)
@@ -265,9 +233,8 @@ yo_two_stop
 ```
 
 
-```{r}
+```{r 03-yo-comparison}
 intersect(yo_two_stop,yo1_stop_mean) 
-
 ```
 
 ## Stopwords for Pidgin
@@ -279,7 +246,7 @@ intersect(yo_two_stop,yo1_stop_mean)
 - For example, "Dis food sweet well, well/Dis food sweet no be smal" in Pidgin English translates to "This meal is delicious"
 
 
-```{r message=FALSE, warning=FALSE}
+```{r 03-wiktionary, message=FALSE, warning=FALSE}
 dic <- enframe(read_rds("data/wiktionary_words.rds")) %>% 
   rename(words = value) %>% 
   mutate(word = str_extract_all(words, boundary("word")) ) %>% 
@@ -288,8 +255,7 @@ dic <- enframe(read_rds("data/wiktionary_words.rds")) %>%
   arrange(word) 
 ```
 
-```{r message=FALSE, warning=FALSE}
-
+```{r 03-pidgin, message=FALSE, warning=FALSE}
 Piding <- read_tsv("https://raw.githubusercontent.com/keleog/PidginUNMT/master/corpus/monolingual/pidgin_corpus.txt", col_names = FALSE) %>% 
   rename(text = 1)
 
@@ -306,15 +272,15 @@ Piding %>%
 ```
 
 
-```{r}
-  Piding %>%
+```{r 03-pidgin-antijoin}
+Piding %>%
   unnest_tokens(word, text) %>%
   count(word, sort = TRUE) %>% 
   mutate(mean_frequency = n/nrow(Piding)) %>% 
   mutate(rank_freq = row_number()) %>% 
   filter(n >2) %>% 
   select(word)%>% 
- anti_join(dic) %>% 
+  anti_join(dic) %>% 
   head(10)
 ```
 
@@ -324,7 +290,6 @@ Piding %>%
 - It can be difficult to determine a priori how many different “meaningless” words appear in a corpus. 
 
 - But, Start with a low number like 20 and increase by 10 words until you get to words that are not appropriate as stop words for your analytical purpose.
-
 
 > There’s no universal stop words list because a word can be empty of meaning depending on the corpus you are using or on the problem you are analysing
 
