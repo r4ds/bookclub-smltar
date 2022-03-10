@@ -13,12 +13,12 @@
 
 ### Cohort 1
 
-`r knitr::include_url("https://www.youtube.com/embed/URL")`
+`r knitr::include_url("https://www.youtube.com/embed/YKbHEIffNFY")`
 
 <details>
 <summary> Meeting chat log </summary>
-
 ```
-LOG
+00:58:09	shamsuddeen:	http://talnarchives.atala.org/ateliers/2016/CLTW/2.pdf
+00:58:20	shamsuddeen:	https://github.com/ancatmara/early-irish-lemmatizer
 ```
 </details>

@@ -366,16 +366,20 @@ Piding %>%
 
 ### Cohort 1
 
-`r knitr::include_url("https://www.youtube.com/embed/URL")`
+`r knitr::include_url("https://www.youtube.com/embed/9tJ6tkOuHic")`
 
 <details>
-
-<summary>
-
-Meeting chat log
-
-</summary>
-
-    LOG
-
+<summary> Meeting chat log </summary>
+```
+00:14:48	Hong:	Hi Sham, sorry if I pronounce your name wrong.. Could you please share the link of a copy of the text book? thank you.. the screen is a little bit small to read on my small laptop screen. 
+00:15:16	Justin Dollman:	Ok!
+00:15:30	Justin Dollman:	https://smltar.com/
+00:15:58	Hong:	Thank you :)
+00:18:43	Hong:	thank you
+00:28:35	Justin Dollman:	https://r4ds.github.io/bookclub-smltar/
+00:43:25	Justin Dollman:	“How do I get this grass (weed!) out of my flower pot!! #brooklyngardenproblems”
+00:43:44	Justin Dollman:	Classification about drugs: 99% certainty
+00:43:50	Layla Bouzoubaa:	bahahahahah
+00:43:58	Layla Bouzoubaa:	Story of my life
+```
 </details>
