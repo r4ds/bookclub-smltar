@@ -26,3 +26,20 @@
 00:55:03	Jiwan Heo:	yea I remember incorrectly answering a slack question, and Max corrected me one time lol
 ```
 </details>
+
+`r knitr::include_url("https://www.youtube.com/embed/GNqKLd8SqNU")`
+
+<details>
+<summary> Meeting chat log </summary>
+```
+00:16:18	Bob Dylan:	The smaller the penality, the less regularization. The drop-off at the larger penalties means the model becomes too inflexible.
+00:17:09	Bob Dylan:	This is Bob Dylan in the chat.
+00:17:16	Jiwan Heo:	lol
+00:22:28	Bob Dylan:	It's not that the second one has a smaller standard error, it's that its AUC is statistically indistinguishable from the "best" one and its penalty is higher (i.e., simpler model)
+00:32:02	Bob Dylan:	I *think* it's just changing the data type.
+00:32:09	Bob Dylan:	It's not sparse rather than dense.
+00:33:13	Bob Dylan:	It's efficient and sparse versus inefficient and sparse.
+00:33:51	Bob Dylan:	It's what dgCMatrix is doing
+00:43:16	Bob Dylan:	I see them!
+```
+</details>

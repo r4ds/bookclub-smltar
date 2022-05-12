@@ -13,12 +13,15 @@
 
 ### Cohort 1
 
-`r knitr::include_url("https://www.youtube.com/embed/URL")`
+`r knitr::include_url("https://www.youtube.com/embed/kta4NnTCfb4")`
+
+`r knitr::include_url("https://www.youtube.com/embed/z6LlhOX4G4I")`
 
 <details>
 <summary> Meeting chat log </summary>
 
 ```
-LOG
+00:07:05	shamsuddeen:	https://torch.mlverse.org/
+00:36:03	shamsuddeen:	https://stats.stackexchange.com/questions/153531/what-is-batch-size-in-neural-network
 ```
 </details>
